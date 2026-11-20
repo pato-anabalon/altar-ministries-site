@@ -1,6 +1,6 @@
 import type { ComponentProps, ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/cn";
+import { cn, externalLinkProps } from "@/lib/cn";
 
 /**
  * TextLink = navigation inside copy and lists. The underline draws out to the right on hover and
@@ -11,7 +11,7 @@ const textLinkClasses = cn(
   "transition-[background-size] duration-500 ease-out-expo hover:bg-[length:0%_1px] hover:bg-[position:100%_100%]",
 );
 
-type CommonProps = { children: ReactNode; className?: string; "data-testid"?: string };
+type CommonProps = { children: ReactNode; className?: string; onClick?: () => void; "data-testid"?: string };
 
 export function TextLink(
   props: CommonProps & ({ href: ComponentProps<typeof Link>["href"]; externalHref?: never } | { externalHref: string; href?: never }),
@@ -22,7 +22,7 @@ export function TextLink(
   if (rest.externalHref !== undefined) {
     const { externalHref, ...anchorRest } = rest;
     return (
-      <a href={externalHref} target="_blank" rel="noopener noreferrer" className={classes} {...anchorRest}>
+      <a href={externalHref} {...externalLinkProps(externalHref)} className={classes} {...anchorRest}>
         {children}
       </a>
     );

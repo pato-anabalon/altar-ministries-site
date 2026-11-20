@@ -253,7 +253,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 |---|---|---|
 | 0 | Setup ✅ | Repo local, Next.js + Tailwind v4 + next-intl, fuentes, tokens, lint/tests (revisión solo en local) |
 | 1 | Sistema de diseño ✅ | Escala tipográfica, superficies (cream/white/green/ink), Button, TextLink, Container, Section, Placeholder, Logo, Wordmark, Modal; `/[locale]/dev/styleguide` (solo dev) |
-| 2 | Layout | Header (desktop + menú móvil), Footer con crédito Nodo, LocaleSwitcher, Lenis + base de animaciones |
+| 2 | Layout ✅ | Header (transparente sobre hero oscuro → crema; se oculta al bajar), menú móvil (`<dialog>` verde), Footer con wordmark y crédito Nodo, LocaleSwitcher con slugs traducidos, skip link, Lenis + GSAP (`lib/motion`) |
 | 3 | Capa de contenido | Schemas zod, `lib/content`, data (ministries, leaders, experiences, values, beliefs), traducción ES→EN del perfil institucional |
 | 4 | Preloader + Hero | Preloader, transición del arco y hero pinned (con imágenes provisionales hasta tener las finales) |
 | 4b | Home | Resto de secciones de Home |

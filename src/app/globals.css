@@ -35,46 +35,48 @@
   --color-surface: var(--s-bg);
 }
 
-:root,
-[data-surface="cream"] {
-  --s-bg: var(--color-cream);
-  --s-fg: var(--color-ink);
-  --s-muted: var(--color-stone);
-  --s-accent: var(--color-green);
-  --s-on-accent: var(--color-cream);
-  --s-rule: color-mix(in oklab, var(--color-stone) 28%, transparent);
-}
+@layer base {
+  :root,
+  [data-surface="cream"] {
+    --s-bg: var(--color-cream);
+    --s-fg: var(--color-ink);
+    --s-muted: var(--color-stone);
+    --s-accent: var(--color-green);
+    --s-on-accent: var(--color-cream);
+    --s-rule: color-mix(in oklab, var(--color-stone) 28%, transparent);
+  }
 
-[data-surface="white"] {
-  --s-bg: var(--color-white);
-  --s-fg: var(--color-ink);
-  --s-muted: var(--color-stone);
-  --s-accent: var(--color-green);
-  --s-on-accent: var(--color-cream);
-  --s-rule: color-mix(in oklab, var(--color-stone) 22%, transparent);
-}
+  [data-surface="white"] {
+    --s-bg: var(--color-white);
+    --s-fg: var(--color-ink);
+    --s-muted: var(--color-stone);
+    --s-accent: var(--color-green);
+    --s-on-accent: var(--color-cream);
+    --s-rule: color-mix(in oklab, var(--color-stone) 22%, transparent);
+  }
 
-[data-surface="green"] {
-  --s-bg: var(--color-green);
-  --s-fg: var(--color-cream);
-  --s-muted: color-mix(in oklab, var(--color-cream) 78%, var(--color-green));
-  --s-accent: var(--color-cream);
-  --s-on-accent: var(--color-green);
-  --s-rule: color-mix(in oklab, var(--color-cream) 26%, transparent);
-}
+  [data-surface="green"] {
+    --s-bg: var(--color-green);
+    --s-fg: var(--color-cream);
+    --s-muted: color-mix(in oklab, var(--color-cream) 78%, var(--color-green));
+    --s-accent: var(--color-cream);
+    --s-on-accent: var(--color-green);
+    --s-rule: color-mix(in oklab, var(--color-cream) 26%, transparent);
+  }
 
-[data-surface="ink"] {
-  --s-bg: var(--color-ink);
-  --s-fg: var(--color-cream);
-  --s-muted: color-mix(in oklab, var(--color-cream) 72%, var(--color-ink));
-  --s-accent: var(--color-cream);
-  --s-on-accent: var(--color-ink);
-  --s-rule: color-mix(in oklab, var(--color-cream) 22%, transparent);
-}
+  [data-surface="ink"] {
+    --s-bg: var(--color-ink);
+    --s-fg: var(--color-cream);
+    --s-muted: color-mix(in oklab, var(--color-cream) 72%, var(--color-ink));
+    --s-accent: var(--color-cream);
+    --s-on-accent: var(--color-ink);
+    --s-rule: color-mix(in oklab, var(--color-cream) 22%, transparent);
+  }
 
-[data-surface] {
-  background-color: var(--s-bg);
-  color: var(--s-fg);
+  [data-surface] {
+    background-color: var(--s-bg);
+    color: var(--s-fg);
+  }
 }
 
 /*
@@ -82,11 +84,14 @@
  * H2 and leads; Tangkiwood is reserved for short accents; Inter light for reading.
  * Mon Cheri is set in capitals: its lowercase "t" is an "i" with a sparkle and no crossbar
  * (no alternate glyph), so "Christ" reads "Chrisi". Capitals match the ALTAR logo.
+ * Its capitals are a full 1em tall and rise ~0.19em above a tight line box, so display styles
+ * pad their top by 0.2em to never touch what sits above them.
  */
 @utility type-display {
   font-family: var(--font-display);
   /* Min sized so a ~10-letter word in capitals fits a 390px phone. */
   font-size: clamp(2.25rem, 1rem + 6.5vw, 6rem);
+  padding-top: 0.2em;
   line-height: 0.98;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -96,6 +101,7 @@
 @utility type-h1 {
   font-family: var(--font-display);
   font-size: clamp(2.25rem, 1.7rem + 2.8vw, 4.25rem);
+  padding-top: 0.2em;
   line-height: 1.02;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -196,7 +202,50 @@
   }
 }
 
-html:has(.altar-modal[open]) {
+/* Mobile menu (components/organisms/MobileMenu.tsx): the green sheet fades in, items rise in turn. */
+.altar-menu {
+  opacity: 0;
+  transition:
+    opacity 0.4s var(--ease-out-expo),
+    overlay 0.4s allow-discrete,
+    display 0.4s allow-discrete;
+}
+
+.altar-menu[open] {
+  opacity: 1;
+}
+
+.altar-menu::backdrop {
+  background: transparent;
+}
+
+.altar-menu .altar-menu-item {
+  opacity: 0;
+  translate: 0 1.25rem;
+  transition:
+    opacity 0.5s var(--ease-out-expo),
+    translate 0.8s var(--ease-out-expo);
+  transition-delay: calc(0.08s + var(--i, 0) * 0.045s);
+}
+
+.altar-menu[open] .altar-menu-item {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@starting-style {
+  .altar-menu[open] {
+    opacity: 0;
+  }
+
+  .altar-menu[open] .altar-menu-item {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+}
+
+html:has(.altar-modal[open]),
+html:has(.altar-menu[open]) {
   overflow: hidden;
 }
 

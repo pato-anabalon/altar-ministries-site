@@ -13,5 +13,39 @@
   "notFound": {
     "title": "Page not found",
     "back": "Back to home"
+  },
+  "nav": {
+    "visit": "Visit us",
+    "about": "About",
+    "ministries": "Ministries",
+    "community": "Community",
+    "global": "Global",
+    "events": "Events",
+    "resources": "Resources",
+    "contact": "Contact",
+    "newsletters": "Newsletter",
+    "policies": "Policies"
+  },
+  "header": {
+    "planVisit": "Plan your visit",
+    "watchOnline": "Watch online",
+    "openMenu": "Menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main",
+    "skipToContent": "Skip to content",
+    "language": "Language",
+    "home": "Altar Ministries, home"
+  },
+  "footer": {
+    "tagline": "A church in Ponsonby, Auckland",
+    "gatherings": "Sunday Experience",
+    "sundayTimes": "Every Sunday · Coffee at noon, Experience at 1 pm",
+    "explore": "Explore",
+    "connect": "Connect",
+    "instagram": "Instagram",
+    "rights": "All rights reserved.",
+    "creditBefore": "Built with",
+    "creditAfter": "by",
+    "heartLabel": "love"
   }
 }

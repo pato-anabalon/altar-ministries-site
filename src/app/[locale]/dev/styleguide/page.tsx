@@ -22,7 +22,7 @@ export default function StyleguidePage({ params }: PageProps<"/[locale]/dev/styl
   setRequestLocale(locale as Locale);
 
   return (
-    <main>
+    <>
       <Section surface="green" className="text-center">
         <Container>
           <Wordmark className="text-[clamp(5rem,18vw,13rem)]" />
@@ -35,7 +35,7 @@ export default function StyleguidePage({ params }: PageProps<"/[locale]/dev/styl
       <Surfaces />
       <Logos />
       <Placeholders />
-    </main>
+    </>
   );
 }
 

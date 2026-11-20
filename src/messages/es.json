@@ -13,5 +13,39 @@
   "notFound": {
     "title": "Página no encontrada",
     "back": "Volver al inicio"
+  },
+  "nav": {
+    "visit": "Visítanos",
+    "about": "Nosotros",
+    "ministries": "Ministerios",
+    "community": "Comunidad",
+    "global": "Global",
+    "events": "Eventos",
+    "resources": "Recursos",
+    "contact": "Contacto",
+    "newsletters": "Boletín",
+    "policies": "Políticas"
+  },
+  "header": {
+    "planVisit": "Planifica tu visita",
+    "watchOnline": "Míranos en línea",
+    "openMenu": "Menú",
+    "closeMenu": "Cerrar menú",
+    "mainNav": "Principal",
+    "skipToContent": "Saltar al contenido",
+    "language": "Idioma",
+    "home": "Altar Ministries, inicio"
+  },
+  "footer": {
+    "tagline": "Una iglesia en Ponsonby, Auckland",
+    "gatherings": "Experiencia del domingo",
+    "sundayTimes": "Todos los domingos · Café al mediodía y Experiencia a las 13 h",
+    "explore": "Explora",
+    "connect": "Conecta",
+    "instagram": "Instagram",
+    "rights": "Todos los derechos reservados.",
+    "creditBefore": "Hecho con",
+    "creditAfter": "por",
+    "heartLabel": "amor"
   }
 }

@@ -1,7 +1,7 @@
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ComponentProps, ReactNode } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { cn } from "@/lib/cn";
+import { cn, externalLinkProps } from "@/lib/cn";
 
 type Variant = "primary" | "secondary";
 type Size = "md" | "lg";
@@ -16,7 +16,10 @@ type CommonProps = {
   "data-testid"?: string;
 };
 
-type AsInternal = CommonProps & { href: ComponentProps<typeof Link>["href"]; externalHref?: never };
+type AsInternal = CommonProps & { href: ComponentProps<typeof Link>["href"]; externalHref?: never } & Omit<
+    AnchorHTMLAttributes<HTMLAnchorElement>,
+    "href" | "className" | "children"
+  >;
 type AsExternal = CommonProps & { externalHref: string; href?: never } & Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "className" | "children">;
 type AsButton = CommonProps & { href?: never; externalHref?: never } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className" | "children">;
 
@@ -69,7 +72,7 @@ export function Button(props: AsInternal | AsExternal | AsButton) {
   if ("externalHref" in rest && rest.externalHref !== undefined) {
     const { externalHref, ...anchorRest } = rest as Omit<AsExternal, keyof CommonProps>;
     return (
-      <a href={externalHref} target="_blank" rel="noopener noreferrer" className={classes} {...anchorRest}>
+      <a href={externalHref} {...externalLinkProps(externalHref)} className={classes} {...anchorRest}>
         {children}
         {arrow && <Arrow external />}
       </a>

@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef, type ReactNode } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/cn";
+import { lockScroll } from "@/lib/motion/lenis";
 import type { SurfaceName } from "@/components/atoms/Section";
 
 /**
@@ -37,6 +38,7 @@ export function Modal({
     if (!dialog) return;
     if (open && !dialog.open) dialog.showModal();
     if (!open && dialog.open) dialog.close();
+    if (open) return lockScroll();
   }, [open]);
 
   return (

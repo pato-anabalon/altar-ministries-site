@@ -84,7 +84,14 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 - [x] Imágenes del hero (IA): `cross.png` (16:9; la 9:16 se recorta centrada), `auckland-desktop.png` (16:9, Sky Tower a la izquierda + Harbour Bridge a la derecha), `auckland-mobile.png` (9:16)
 - [ ] Opcional: escalar ×1.5 el recorte 9:16 de la cruz (hoy 864×1536)
 - [ ] Opcional: reemplazar Auckland por foto real equivalente (North Shore → CBD + Harbour Bridge, hora azul)
-- [ ] Plataforma y URL de la transmisión online (hoy: placeholder en "Watch online" y Messages)
+- [ ] Plataforma y URL de la transmisión online (hoy: "Watch online" apunta a Instagram; cambiar `streamUrl` en `src/lib/site.ts`)
+- [x] Dirección y horario de la Sunday Experience: St Stephen's Presbyterian Church, 65 Jervois Road, Ponsonby · domingos, café 12 h, Experience 13 h (tomado del prototipo, `src/lib/site.ts`)
+- [ ] Confirmar si se publica la dirección del Friday Home Experience (83A Seaview Road, Remuera): parece un domicilio particular
+- [ ] Partners in Faith: LAPET y la Iglesia Presbiteriana de Aotearoa NZ aparecen "para revisión" en el prototipo; confirmar antes de publicarlos
+- [ ] Christmas Dinner: detalles pendientes ("Pending confirmation" en el prototipo)
+- [ ] Altar Kids, Prophetic, Women, Men, Media, Maintenance, Hospitality: descripción del equipo pendiente
+
+Todo el contenido del prototipo (EN + ES) quedó en `design-source/prototype/contenido-prototipo.md` (privado, no versionado).
 - [ ] Revisión por el cliente de la traducción ES → EN
 
 ## Datos del proyecto

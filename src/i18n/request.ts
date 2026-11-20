@@ -8,6 +8,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   return {
     locale,
+    // Dates and times (events, gatherings) are always Auckland time, whatever the server's zone.
+    timeZone: "Pacific/Auckland",
     messages: (await import(`../messages/${locale}.json`)).default,
   };
 });
