@@ -1,0 +1,23 @@
+node_modules
+.next
+out
+.env*
+!.env.example
+.vercel
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+
+# Local tooling (skills, agents, per-machine config)
+.claude
+.agents
+.codex
+
+# Test / coverage output
+coverage
+*.log
+npm-debug.log*
+
+# Original, heavy and private source assets (client documents, full-size hero sources).
+# Anything in public/ is served on the site; the site uses optimised copies there.
+design-source
