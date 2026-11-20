@@ -64,7 +64,7 @@ export default async function EventPage({ params }: PageProps<"/[locale]/events/
                 </div>
               )}
               <div className="pt-2">
-                <Button href="/contact" arrow>
+                <Button href={{ pathname: "/contact", query: { about: event.title, topic: "other" } }} arrow>
                   {t("askCta")}
                 </Button>
               </div>

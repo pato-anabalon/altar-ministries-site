@@ -128,7 +128,47 @@
   "policies": {
     "documentSoon": "Document coming soon"
   },
-  "newsletter": {
-    "formSoon": "Sign-up opens very soon. Until then, follow us on Instagram or write to us and we’ll add you to the list."
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone (optional)",
+    "topic": "What is it about?",
+    "topicPlaceholder": "Choose one",
+    "topics": {
+      "visit": "Visiting a gathering",
+      "team": "Joining a team",
+      "community": "Community support",
+      "other": "Something else"
+    },
+    "message": "Message",
+    "about": "About: {about}",
+    "consentContact": "I agree to Altar Ministries using these details to reply to me.",
+    "policiesLink": "Our policies",
+    "send": "Send message",
+    "sending": "Sending…",
+    "sentTitle": "Thank you. Your message is on its way.",
+    "sentText": "We’ll get back to you soon.",
+    "errorGeneric": "Something went wrong and it wasn’t sent. Please try again, or write to us at {email}.",
+    "errorRate": "Too many attempts in a short time. Please wait a few minutes and try again.",
+    "language": "Newsletter language",
+    "consentNewsletter": "I agree to receive the Altar Ministries newsletter. I can unsubscribe at any time.",
+    "subscribe": "Subscribe",
+    "subscribing": "Subscribing…",
+    "subscribedTitle": "You’re subscribed.",
+    "subscribedText": "Thank you for staying in touch with Altar.",
+    "errors": {
+      "required": "This field is required.",
+      "email": "Enter a valid email address.",
+      "tooShort": "Please write a little more.",
+      "tooLong": "This is too long.",
+      "consent": "Please tick the box so we can go ahead."
+    }
+  },
+  "contact": {
+    "formTitle": "Send us a message",
+    "sunday": "Sunday Experience",
+    "call": "Call us",
+    "write": "Email",
+    "follow": "Follow us"
   }
 }

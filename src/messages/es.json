@@ -128,7 +128,47 @@
   "policies": {
     "documentSoon": "Documento muy pronto"
   },
-  "newsletter": {
-    "formSoon": "La suscripción abre muy pronto. Mientras tanto, síguenos en Instagram o escríbenos y te sumamos a la lista."
+  "forms": {
+    "name": "Nombre",
+    "email": "Correo",
+    "phone": "Teléfono (opcional)",
+    "topic": "¿Sobre qué es?",
+    "topicPlaceholder": "Elige una opción",
+    "topics": {
+      "visit": "Visitar una reunión",
+      "team": "Sumarme a un equipo",
+      "community": "Servicio a la comunidad",
+      "other": "Otra cosa"
+    },
+    "message": "Mensaje",
+    "about": "Sobre: {about}",
+    "consentContact": "Acepto que Altar Ministries use estos datos para responderme.",
+    "policiesLink": "Nuestras políticas",
+    "send": "Enviar mensaje",
+    "sending": "Enviando…",
+    "sentTitle": "Gracias. Tu mensaje va en camino.",
+    "sentText": "Te responderemos pronto.",
+    "errorGeneric": "Algo falló y no se envió. Inténtalo de nuevo o escríbenos a {email}.",
+    "errorRate": "Demasiados intentos en poco tiempo. Espera unos minutos e inténtalo de nuevo.",
+    "language": "Idioma del boletín",
+    "consentNewsletter": "Acepto recibir el boletín de Altar Ministries. Puedo darme de baja cuando quiera.",
+    "subscribe": "Suscribirme",
+    "subscribing": "Suscribiendo…",
+    "subscribedTitle": "Ya estás suscrito.",
+    "subscribedText": "Gracias por seguir en contacto con Altar.",
+    "errors": {
+      "required": "Este campo es obligatorio.",
+      "email": "Escribe un correo válido.",
+      "tooShort": "Escribe un poco más, por favor.",
+      "tooLong": "Es demasiado largo.",
+      "consent": "Marca la casilla para poder continuar."
+    }
+  },
+  "contact": {
+    "formTitle": "Escríbenos",
+    "sunday": "Experiencia del domingo",
+    "call": "Llámanos",
+    "write": "Correo",
+    "follow": "Síguenos"
   }
 }

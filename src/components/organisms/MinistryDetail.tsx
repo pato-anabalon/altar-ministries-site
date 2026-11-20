@@ -25,7 +25,7 @@ export function MinistryDetail({ ministry, labels }: { ministry: Ministry; label
         </dl>
       )}
       <div>
-        <Button href="/contact" arrow>
+        <Button href={{ pathname: "/contact", query: { about: ministry.name, topic: "team" } }} arrow>
           {labels.askCta}
         </Button>
       </div>
