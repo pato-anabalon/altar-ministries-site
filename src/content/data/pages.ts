@@ -9,6 +9,19 @@ export const pages = {
       en: "Welcome to Altar Ministries. We are a young church community in Ponsonby. Come as you are and discover what an Experience is like.",
       es: "Te damos la bienvenida a Altar Ministries, una comunidad cristiana joven en Ponsonby. Ven tal como eres y descubre cómo vivimos una Experiencia.",
     },
+    // Institutional profile 2026, "Nuestras Expresiones de Iglesia".
+    statement: {
+      en: "We don’t talk about Sunday services. We talk about Experiences.",
+      es: "En Altar no hablamos de “servicios dominicales”. Hablamos de Experiencias.",
+    },
+    statementBody: {
+      en: "Every gathering seeks a fresh encounter, revelation and transformation. Each Experience is lived, not just heard: we worship, learn, listen, practise and are transformed together.",
+      es: "Cada reunión busca un encuentro, una revelación y una transformación frescos. Cada Experiencia es vivencial, no solo informativa: creemos en adorar, aprender, escuchar, practicar y transformar en cada encuentro.",
+    },
+    messages: {
+      en: "Catch up on our latest message, or join us online from wherever you are.",
+      es: "Mira nuestro último mensaje o acompáñanos en línea desde donde estés.",
+    },
   },
   visit: {
     title: { en: "Visit us", es: "Visítanos" },

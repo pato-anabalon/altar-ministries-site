@@ -8,6 +8,7 @@ import { history } from "@/content/data/history";
 import { leaders } from "@/content/data/leaders";
 import { ministries } from "@/content/data/ministries";
 import { pages } from "@/content/data/pages";
+import { photos } from "@/content/data/photos";
 import { values } from "@/content/data/values";
 import type { Locale } from "@/i18n/routing";
 import { isPublished, resolve } from "./localized";
@@ -21,6 +22,7 @@ import {
   ministrySchema,
   namedItemSchema,
   pagesSchema,
+  photoSchema,
 } from "./schemas";
 
 /**
@@ -45,12 +47,22 @@ const content = {
   global: parse("global", globalSchema, global),
   events: parse("events", z.array(eventSchema), events),
   pages: parse("pages", pagesSchema, pages),
+  photos: parse("photos", z.array(photoSchema), photos),
 };
 
 export type PageKey = keyof typeof content.pages;
 
 export function getPage<K extends PageKey>(key: K, locale: Locale) {
   return resolve(content.pages[key], locale);
+}
+
+export type PhotoId = (typeof photos)[number]["id"];
+
+/** A congregation photo with its alt text in `locale`. Throws on an unknown id (caught at build). */
+export function getPhoto(id: PhotoId, locale: Locale) {
+  const photo = content.photos.find((item) => item.id === id);
+  if (!photo) throw new Error(`Unknown photo "${id}" (src/content/data/photos.ts)`);
+  return resolve(photo, locale);
 }
 
 export function getExperiences(locale: Locale) {

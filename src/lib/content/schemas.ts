@@ -98,6 +98,10 @@ export const eventSchema = z
   })
   .strict();
 
+export const photoSchema = z
+  .object({ id, src: z.string().regex(/^\/images\/[\w/.-]+\.(avif|webp|jpe?g|png)$/), alt: localizedText })
+  .strict();
+
 const pageCopy = z.object({ title: localizedText, intro: localizedText.optional() }).catchall(localizedText);
 
 export const pagesSchema = z

@@ -257,7 +257,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 | 2 | Layout ✅ | Header (transparente sobre hero oscuro → crema; se oculta al bajar), menú móvil (`<dialog>` verde), Footer con wordmark y crédito Nodo, LocaleSwitcher con slugs traducidos, skip link, Lenis + GSAP (`lib/motion`) |
 | 3 | Capa de contenido ✅ | `src/content/data/*.ts` bilingües (`{ en, es }`), schemas zod + `lib/content` (getters por idioma, validación al build), estado `pending` (visible en dev, oculto en prod), slugs traducidos para ministerios/eventos, MDX configurado; textos EN/ES del prototipo + perfil |
 | 4 | Preloader + Hero ✅ | `AltarPreloader` (1 vez por sesión, boot script en `<head>`, deadline 5,5 s + failsafe CSS 6 s), ventana en cruz compartida (`lib/motion/windowShape.ts`, arco disponible en `arch.ts`), `HomeHero` pinned 180 % con scrub (ALTAR delante de la ventana; ventana y cruz de la foto alineadas con la T midiendo la fuente en vivo, `lib/motion/glyph.ts` + `crossAlign.ts`), imágenes art-directed (desktop/móvil), `InfoBar`; estado final estático sin JS / reduced motion |
-| 4b | Home | Resto de secciones de Home |
+| 4b | Home ✅ | Frase de Experiencias + fotos, lista de Experiences, ADN (verde), ministerios como links, Comunidad, Mensajes (video placeholder), próximos eventos (hora de Auckland), "Sigamos en contacto"; revelado único `Reveal` (rise/photo). Sin trío "Connect" (redundante); formulario de boletín en el hito 8 |
 | 5 | Páginas institucionales | Visit, About (+ History, DNA, Leadership), Community, Global |
 | 6 | Ministries | Grilla + modal con URL propia (intercepting routes) |
 | 7 | Events + Resources | MDX de eventos, listado/detalle, cron de revalidación; Resources con placeholders; Policies; Newsletters |

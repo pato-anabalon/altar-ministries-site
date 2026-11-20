@@ -7,7 +7,18 @@
     "description": "Altar Ministries es una comunidad cristiana joven en Ponsonby, Auckland. Ven tal como eres y descubre cómo vivimos una Experiencia."
   },
   "home": {
-    "scrollCue": "Desliza para entrar"
+    "scrollCue": "Desliza para entrar",
+    "experiencesTitle": "Nuestras Experiencias",
+    "experiencesCta": "Ver horarios y lugares",
+    "valuesCta": "Conoce nuestro ADN",
+    "ministriesCta": "Ver todos los ministerios",
+    "communityCta": "Cómo servimos",
+    "messagesTitle": "Mensajes",
+    "messagesAll": "Todos los mensajes",
+    "messagesVideo": "Video: último mensaje",
+    "eventsCta": "Todos los eventos",
+    "noEvents": "No hay próximos eventos por ahora. Vuelve pronto.",
+    "newsletterCta": "Suscríbete"
   },
   "notFound": {
     "title": "Página no encontrada",
