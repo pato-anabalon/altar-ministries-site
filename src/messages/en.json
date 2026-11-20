@@ -103,5 +103,13 @@
     "partners": "Partners in Faith",
     "stayConnected": "Stay connected",
     "stayConnectedText": "News from Altar reaches people in many countries. Subscribe to the newsletter or get in touch."
+  },
+  "ministries": {
+    "people": "Every stage of life",
+    "serve": "Serve together",
+    "askCta": "Ask about this team",
+    "all": "All ministries",
+    "pending": "Team description coming soon. Get in touch to ask about taking part.",
+    "photo": "Photo: {name}"
   }
 }

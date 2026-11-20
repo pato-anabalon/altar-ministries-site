@@ -108,6 +108,17 @@
   text-wrap: balance;
 }
 
+/*
+ * Spanish capitals carry accents (Á É Í Ó Ú Ñ): in Mon Cheri a long hairline rising to 1.225em. With the tight
+ * display leading, a second line's accent would land on the line above ("JÓVENES" under
+ * "MINISTERIO"), so Spanish gets room for it.
+ */
+:lang(es) .type-display,
+:lang(es) .type-h1 {
+  padding-top: 0.26em;
+  line-height: 1.38;
+}
+
 @utility type-h2 {
   font-family: var(--font-serif);
   font-weight: 400;

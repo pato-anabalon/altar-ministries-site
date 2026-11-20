@@ -143,7 +143,7 @@ Sin CMS, sin base de datos en fase 1.
 | Bookshop | `/en/bookshop` | `/es/libreria` | 2 |
 
 **Ministerios** (10, grilla + modal): kids, youth, women, men, worship, prophetic, media, hospitality, maintenance, special-events.
-Modal con URL propia → *intercepting + parallel routes* (`@modal/(.)ministries/[slug]`): desde la grilla abre modal y "atrás" lo cierra; acceso directo renderiza la página completa.
+Modal con URL propia → `history.pushState` (integrado con el router de Next): desde la grilla abre modal y "atrás" lo cierra; acceso directo renderiza la página completa. (Se descartaron *intercepting routes* porque las URLs traducidas de next-intl se reescriben a rutas internas en inglés.)
 
 **Navegación**
 - Header: Visit Us · About · Ministries · Community · Global · Events · Resources · [Contact] · EN/ES. CTA "Plan your visit".
@@ -257,7 +257,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 | 4 | Preloader + Hero ✅ | `AltarPreloader` (1 vez por sesión, boot script en `<head>`, deadline 5,5 s + failsafe CSS 6 s), ventana en cruz compartida (`lib/motion/windowShape.ts`, arco disponible en `arch.ts`), `HomeHero` pinned 180 % con scrub (ALTAR delante de la ventana; ventana y cruz de la foto alineadas con la T midiendo la fuente en vivo, `lib/motion/glyph.ts` + `crossAlign.ts`), imágenes art-directed (desktop/móvil), `InfoBar`; estado final estático sin JS / reduced motion |
 | 4b | Home ✅ | Frase de Experiencias + fotos, lista de Experiences, ADN (verde), ministerios como links, Comunidad, Mensajes (video placeholder), próximos eventos (hora de Auckland), "Sigamos en contacto"; revelado único `Reveal` (rise/photo). Sin trío "Connect" (redundante); formulario de boletín en el hito 8 |
 | 5 | Páginas institucionales ✅ | Visit (domingo en grande, Experiences, en línea, teléfonos), About (+ History, DNA, Leadership), Community, Global en una sola página (sin subrutas: cada área tenía un párrafo). `PageHeader`, metadatos con canonical + hreflang (`lib/seo.ts`), títulos Mon Cheri que nunca desbordan en móvil (`lib/fitText.ts`), fechas en `en-NZ` |
-| 6 | Ministries | Grilla + modal con URL propia (intercepting routes) |
+| 6 | Ministries ✅ | Grilla por grupos (etapas de vida / servir) + modal con URL propia vía History API (`pushState`; el modal está abierto mientras la URL es la de un ministerio); página completa prerenderizada por idioma con slug traducido y hreflang; 404 para slugs desconocidos. Intercepting routes descartadas: frágiles con las URLs traducidas de next-intl |
 | 7 | Events + Resources | MDX de eventos, listado/detalle, cron de revalidación; Resources con placeholders; Policies; Newsletters |
 | 8 | Contact + forms | Formulario de contacto y newsletter con Resend |
 | 9 | Pulido | Animaciones finas, SEO, a11y, performance, QA móvil, revisión de textos EN/ES |

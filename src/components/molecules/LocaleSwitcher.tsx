@@ -14,7 +14,11 @@ export function LocaleSwitcher({ className, onNavigate }: { className?: string; 
   const current = useLocale();
   const pathname = usePathname();
   const params = useParams();
+  // A route whose dynamic segments are not all known (e.g. the 404 for an unknown slug) can't be
+  // translated: send the visitor to the other language's home instead of failing to render.
+  const complete = (pathname.match(/\[(\w+)\]/g) ?? []).every((segment) => typeof params[segment.slice(1, -1)] === "string");
   const hrefFor = (locale: Locale) => {
+    if (!complete) return "/" as ComponentProps<typeof Link>["href"];
     const slug = typeof params.slug === "string" ? translateSlug(pathname, params.slug, locale) : undefined;
     return { pathname, params: slug ? { ...params, slug } : params } as ComponentProps<typeof Link>["href"];
   };

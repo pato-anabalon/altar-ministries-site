@@ -103,5 +103,13 @@
     "partners": "Aliados en la fe",
     "stayConnected": "Sigamos conectados",
     "stayConnectedText": "Las noticias de Altar llegan a personas en muchos países. Suscríbete al boletín o escríbenos."
+  },
+  "ministries": {
+    "people": "Para cada etapa de la vida",
+    "serve": "Servir juntos",
+    "askCta": "Consulta por este equipo",
+    "all": "Todos los ministerios",
+    "pending": "Descripción del equipo muy pronto. Escríbenos para consultar cómo participar.",
+    "photo": "Foto: {name}"
   }
 }

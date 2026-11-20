@@ -7,8 +7,11 @@ const ogLocales: Record<Locale, string> = { en: "en_NZ", es: "es_419" };
 
 /**
  * Per-page metadata: title, description, canonical URL and hreflang alternates (both languages
- * plus x-default → English), and matching Open Graph fields. Dynamic routes pass `{ pathname, params }`.
+ * plus x-default → English), and matching Open Graph fields. Routes with translated slugs pass a
+ * function so each language links to its own slug.
  */
+type Href = Parameters<typeof getPathname>[0]["href"];
+
 export function pageMetadata({
   locale,
   href,
@@ -16,11 +19,11 @@ export function pageMetadata({
   description,
 }: {
   locale: Locale;
-  href: Parameters<typeof getPathname>[0]["href"];
+  href: Href | ((target: Locale) => Href);
   title: string;
   description?: string;
 }): Metadata {
-  const url = (target: Locale) => `${site.url}${getPathname({ locale: target, href })}`;
+  const url = (target: Locale) => `${site.url}${getPathname({ locale: target, href: typeof href === "function" ? href(target) : href })}`;
   return {
     title,
     description,
