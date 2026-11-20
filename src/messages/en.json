@@ -111,5 +111,24 @@
     "all": "All ministries",
     "pending": "Team description coming soon. Get in touch to ask about taking part.",
     "photo": "Photo: {name}"
+  },
+  "events": {
+    "upcoming": "Upcoming events",
+    "past": "Past events",
+    "all": "All events",
+    "when": "When",
+    "where": "Where",
+    "askCta": "Ask about this event"
+  },
+  "resources": {
+    "filesSoon": "Files coming soon.",
+    "watchCta": "Watch our latest message",
+    "moreTitle": "Also in Resources"
+  },
+  "policies": {
+    "documentSoon": "Document coming soon"
+  },
+  "newsletter": {
+    "formSoon": "Sign-up opens very soon. Until then, follow us on Instagram or write to us and we’ll add you to the list."
   }
 }

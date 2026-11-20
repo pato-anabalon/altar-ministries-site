@@ -111,5 +111,24 @@
     "all": "Todos los ministerios",
     "pending": "Descripción del equipo muy pronto. Escríbenos para consultar cómo participar.",
     "photo": "Foto: {name}"
+  },
+  "events": {
+    "upcoming": "Próximos eventos",
+    "past": "Eventos anteriores",
+    "all": "Todos los eventos",
+    "when": "Cuándo",
+    "where": "Dónde",
+    "askCta": "Consulta por este evento"
+  },
+  "resources": {
+    "filesSoon": "Archivos muy pronto.",
+    "watchCta": "Mira nuestro último mensaje",
+    "moreTitle": "También en Recursos"
+  },
+  "policies": {
+    "documentSoon": "Documento muy pronto"
+  },
+  "newsletter": {
+    "formSoon": "La suscripción abre muy pronto. Mientras tanto, síguenos en Instagram o escríbenos y te sumamos a la lista."
   }
 }

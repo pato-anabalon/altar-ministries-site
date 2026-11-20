@@ -93,6 +93,9 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 
 - [ ] Revisión del cliente de textos redactados por Nodo (no venían en el prototipo): intro de Comunidad, intro de Global, aspiración en ES (armada desde los puntos del perfil). Están en `src/content/data/pages.ts`.
 - [ ] Biografías de Juan Pablo y Natalie: marcadas `pending` (el prototipo pide aprobar la redacción); se ven en desarrollo, no en producción.
+- [ ] Archivos de Resources (predicaciones, audios, audiolibros, PDFs) y documentos de Policies (EN/ES), para subir a Vercel Blob
+- [ ] Política de privacidad y de cookies: necesarias antes de lanzar los formularios (contacto y boletín)
+- [ ] Descripción larga, lugar e imagen de cada evento (hoy solo título, fecha y resumen)
 - [ ] Perfil institucional en PDF (EN y ES) para la descarga desde About (pendiente: hoy solo existe el .md en ES)
 - [ ] Preguntas frecuentes para Visit us (no venían en el material; no se inventaron)
 - [ ] Fecha en que Altar se formalizó como iniciativa de Nexus Initiative Trust (hito del timeline, `pending`).

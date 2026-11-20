@@ -98,6 +98,15 @@ export const eventSchema = z
   })
   .strict();
 
+/** A downloadable or playable file (Vercel Blob URL), in one language. */
+const fileSchema = z.object({ language: z.enum(["en", "es"]), label: localizedText, url: z.url() }).strict();
+
+export const resourceCategorySchema = z
+  .object({ id, name: localizedText, description: localizedText, files: z.array(fileSchema) })
+  .strict();
+
+export const policySchema = z.object({ id, name: localizedText, files: z.array(fileSchema) }).strict();
+
 export const photoSchema = z
   .object({ id, src: z.string().regex(/^\/images\/[\w/.-]+\.(avif|webp|jpe?g|png)$/), alt: localizedText })
   .strict();

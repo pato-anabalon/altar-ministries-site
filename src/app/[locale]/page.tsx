@@ -13,6 +13,9 @@ import type { Locale } from "@/i18n/routing";
 import { getPage } from "@/lib/content";
 import { site } from "@/lib/site";
 
+/** Rebuilt daily so the upcoming events stay current. */
+export const revalidate = 86400;
+
 /**
  * Home: hero → when/where → what an Experience is → the Experiences → our DNA → ministries →
  * community → messages → upcoming events → stay in touch. Surfaces alternate to pace the scroll.

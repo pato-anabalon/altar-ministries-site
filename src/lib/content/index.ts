@@ -9,6 +9,7 @@ import { leaders } from "@/content/data/leaders";
 import { ministries } from "@/content/data/ministries";
 import { pages } from "@/content/data/pages";
 import { photos } from "@/content/data/photos";
+import { policies, resourceCategories } from "@/content/data/resources";
 import { values } from "@/content/data/values";
 import type { Locale } from "@/i18n/routing";
 import { isPublished, resolve } from "./localized";
@@ -23,6 +24,8 @@ import {
   namedItemSchema,
   pagesSchema,
   photoSchema,
+  policySchema,
+  resourceCategorySchema,
 } from "./schemas";
 
 /**
@@ -48,6 +51,8 @@ const content = {
   events: parse("events", z.array(eventSchema), events),
   pages: parse("pages", pagesSchema, pages),
   photos: parse("photos", z.array(photoSchema), photos),
+  resourceCategories: parse("resources", z.array(resourceCategorySchema), resourceCategories),
+  policies: parse("resources", z.array(policySchema), policies),
 };
 
 export type PageKey = keyof typeof content.pages;
@@ -127,6 +132,14 @@ export function getEvents(locale: Locale, now = new Date()) {
 export function getEvent(slug: string, locale: Locale) {
   const event = content.events.find((item) => isPublished(item) && item.slug[locale] === slug);
   return event ? resolve(event, locale) : null;
+}
+
+export function getResourceCategories(locale: Locale) {
+  return resolve(content.resourceCategories, locale);
+}
+
+export function getPolicies(locale: Locale) {
+  return resolve(content.policies, locale);
 }
 
 /** Slugs to prerender per locale for the dynamic routes. */
