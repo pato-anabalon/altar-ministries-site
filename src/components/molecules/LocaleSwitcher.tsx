@@ -4,19 +4,20 @@ import type { ComponentProps } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import { locales } from "@/i18n/routing";
+import { locales, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";
+import { translateSlug } from "@/lib/content/slugs";
 
-/**
- * EN · ES. Keeps the visitor on the same page in the other language (translated slug included).
- * Dynamic routes reuse the current params; content-specific slugs are mapped in their own milestone.
- */
+/** EN · ES. Keeps the visitor on the same page in the other language, translated slug included. */
 export function LocaleSwitcher({ className, onNavigate }: { className?: string; onNavigate?: () => void }) {
   const t = useTranslations("header");
   const current = useLocale();
   const pathname = usePathname();
   const params = useParams();
-  const href = { pathname, params } as ComponentProps<typeof Link>["href"];
+  const hrefFor = (locale: Locale) => {
+    const slug = typeof params.slug === "string" ? translateSlug(pathname, params.slug, locale) : undefined;
+    return { pathname, params: slug ? { ...params, slug } : params } as ComponentProps<typeof Link>["href"];
+  };
 
   return (
     <nav aria-label={t("language")} className={cn("flex items-center gap-1 type-ui", className)}>
@@ -28,7 +29,7 @@ export function LocaleSwitcher({ className, onNavigate }: { className?: string; 
             </span>
           )}
           <Link
-            href={href}
+            href={hrefFor(locale)}
             locale={locale}
             hrefLang={locale}
             lang={locale}

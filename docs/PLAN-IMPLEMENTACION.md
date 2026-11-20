@@ -173,9 +173,9 @@ src/
     templates/   # Composición por página
   lib/motion/            # register, once, preloader, helpers de scroll
   content/
-    events/            todo-por-amor.en.mdx / .es.mdx
-    pages/             about.en.mdx / about.es.mdx ...
-    data/              ministries.ts, leaders.ts, experiences.ts, beliefs.ts, values.ts, site.ts
+    data/              pages.ts, experiences.ts, beliefs.ts, values.ts, leaders.ts, history.ts,
+                       ministries.ts, community.ts, global.ts, events.ts  (cada texto como { en, es })
+    events/            <id>.<locale>.mdx  (cuerpo largo opcional de un evento, cuando exista)
   lib/
     content/           # ÚNICA capa de lectura: getEvents(), getMinistry()... + schemas zod
     email/             # Resend
@@ -254,7 +254,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 | 0 | Setup ✅ | Repo local, Next.js + Tailwind v4 + next-intl, fuentes, tokens, lint/tests (revisión solo en local) |
 | 1 | Sistema de diseño ✅ | Escala tipográfica, superficies (cream/white/green/ink), Button, TextLink, Container, Section, Placeholder, Logo, Wordmark, Modal; `/[locale]/dev/styleguide` (solo dev) |
 | 2 | Layout ✅ | Header (transparente sobre hero oscuro → crema; se oculta al bajar), menú móvil (`<dialog>` verde), Footer con wordmark y crédito Nodo, LocaleSwitcher con slugs traducidos, skip link, Lenis + GSAP (`lib/motion`) |
-| 3 | Capa de contenido | Schemas zod, `lib/content`, data (ministries, leaders, experiences, values, beliefs), traducción ES→EN del perfil institucional |
+| 3 | Capa de contenido ✅ | `src/content/data/*.ts` bilingües (`{ en, es }`), schemas zod + `lib/content` (getters por idioma, validación al build), estado `pending` (visible en dev, oculto en prod), slugs traducidos para ministerios/eventos, MDX configurado; textos EN/ES del prototipo + perfil |
 | 4 | Preloader + Hero | Preloader, transición del arco y hero pinned (con imágenes provisionales hasta tener las finales) |
 | 4b | Home | Resto de secciones de Home |
 | 5 | Páginas institucionales | Visit, About (+ History, DNA, Leadership), Community, Global |

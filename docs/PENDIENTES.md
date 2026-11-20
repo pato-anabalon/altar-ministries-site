@@ -91,6 +91,10 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 - [ ] Christmas Dinner: detalles pendientes ("Pending confirmation" en el prototipo)
 - [ ] Altar Kids, Prophetic, Women, Men, Media, Maintenance, Hospitality: descripción del equipo pendiente
 
+- [ ] Revisión del cliente de textos redactados por Nodo (no venían en el prototipo): intro de Comunidad, intro de Global, aspiración en ES (armada desde los puntos del perfil). Están en `src/content/data/pages.ts`.
+- [ ] Biografías de Juan Pablo y Natalie: marcadas `pending` (el prototipo pide aprobar la redacción); se ven en desarrollo, no en producción.
+- [ ] Fecha en que Altar se formalizó como iniciativa de Nexus Initiative Trust (hito del timeline, `pending`).
+
 Todo el contenido del prototipo (EN + ES) quedó en `design-source/prototype/contenido-prototipo.md` (privado, no versionado).
 - [ ] Revisión por el cliente de la traducción ES → EN
 

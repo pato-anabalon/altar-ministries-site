@@ -21,6 +21,7 @@ Every Nodo site has a preloader, a striking preloader → hero transition, a hig
 
 ## Content rules
 Never invent testimonials, people, dates, bios, numbers or quotes. Missing material → `<Placeholder>` with the final aspect ratio and a label. Spanish source texts are translated to English (en-NZ) pending client review.
+Content lives in `src/content/data/*.ts`, every text as `{ en, es }`; read it only through `@/lib/content` getters (zod-validated at build). Unconfirmed facts get `status: "pending"` (shown in dev, hidden in production). A team without a description has `summary: null`, never filler copy. Source material: `design-source/prototype/contenido-prototipo.md` and `design-source/docs/perfil-institucional.md`.
 `public/` is served: private client documents and heavy originals go in `design-source/` (gitignored).
 
 ## Animation
