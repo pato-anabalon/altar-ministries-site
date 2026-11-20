@@ -129,9 +129,7 @@ Sin CMS, sin base de datos en fase 1.
 | ↳ Ministerio (modal) | `/en/ministries/[slug]` | `/es/ministerios/[slug]` | 1 |
 | Community | `/en/community` | `/es/comunidad` | 1 |
 | Global | `/en/global` | `/es/global` | 1 |
-| ↳ Missions & Church Planting | `/en/global/missions` | `/es/global/misiones` | 1 |
-| ↳ Global Community | `/en/global/community` | `/es/global/comunidad` | 1 |
-| ↳ Partners in Faith | `/en/global/partners` | `/es/global/aliados` | 1 |
+| ↳ Missions, Global Community, Partners | secciones dentro de `/global` (sin subrutas mientras cada una tenga solo un párrafo) | | 1 |
 | ↳ Our Churches | `/en/global/churches` | `/es/global/iglesias` | 2 |
 | ↳ Supporters | `/en/global/supporters` | `/es/global/patrocinadores` | 2 |
 | Events | `/en/events` | `/es/eventos` | 1 |
@@ -258,7 +256,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 | 3 | Capa de contenido ✅ | `src/content/data/*.ts` bilingües (`{ en, es }`), schemas zod + `lib/content` (getters por idioma, validación al build), estado `pending` (visible en dev, oculto en prod), slugs traducidos para ministerios/eventos, MDX configurado; textos EN/ES del prototipo + perfil |
 | 4 | Preloader + Hero ✅ | `AltarPreloader` (1 vez por sesión, boot script en `<head>`, deadline 5,5 s + failsafe CSS 6 s), ventana en cruz compartida (`lib/motion/windowShape.ts`, arco disponible en `arch.ts`), `HomeHero` pinned 180 % con scrub (ALTAR delante de la ventana; ventana y cruz de la foto alineadas con la T midiendo la fuente en vivo, `lib/motion/glyph.ts` + `crossAlign.ts`), imágenes art-directed (desktop/móvil), `InfoBar`; estado final estático sin JS / reduced motion |
 | 4b | Home ✅ | Frase de Experiencias + fotos, lista de Experiences, ADN (verde), ministerios como links, Comunidad, Mensajes (video placeholder), próximos eventos (hora de Auckland), "Sigamos en contacto"; revelado único `Reveal` (rise/photo). Sin trío "Connect" (redundante); formulario de boletín en el hito 8 |
-| 5 | Páginas institucionales | Visit, About (+ History, DNA, Leadership), Community, Global |
+| 5 | Páginas institucionales ✅ | Visit (domingo en grande, Experiences, en línea, teléfonos), About (+ History, DNA, Leadership), Community, Global en una sola página (sin subrutas: cada área tenía un párrafo). `PageHeader`, metadatos con canonical + hreflang (`lib/seo.ts`), títulos Mon Cheri que nunca desbordan en móvil (`lib/fitText.ts`), fechas en `en-NZ` |
 | 6 | Ministries | Grilla + modal con URL propia (intercepting routes) |
 | 7 | Events + Resources | MDX de eventos, listado/detalle, cron de revalidación; Resources con placeholders; Policies; Newsletters |
 | 8 | Contact + forms | Formulario de contacto y newsletter con Resend |

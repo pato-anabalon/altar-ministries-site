@@ -25,6 +25,11 @@ export const pages = {
   },
   visit: {
     title: { en: "Visit us", es: "Visítanos" },
+    // Sunday at a glance (client prototype): coffee at noon, the Experience at 1 pm.
+    coffeeTime: { en: "12 pm", es: "12 h" },
+    coffeeLabel: { en: "Coffee", es: "Café" },
+    startTime: { en: "1 pm", es: "13 h" },
+    startLabel: { en: "Sunday Experience", es: "Experiencia del domingo" },
     intro: {
       en: "We call our gatherings Experiences because we seek a personal encounter with God. You are welcome to observe, take part and respond freely. Join us on Sundays in Ponsonby, Fridays in Remuera or Wednesdays on Zoom. If you are looking for a Spanish-speaking church in Auckland, ask us about language arrangements for your visit.",
       es: "Llamamos Experiencias a nuestras reuniones porque buscamos un encuentro personal con Dios. Puedes observar, participar y responder con libertad. Nos reunimos los domingos en Ponsonby, los viernes en Remuera y los miércoles por Zoom. Si buscas una iglesia cristiana en español en Auckland, consúltanos por los idiomas disponibles para tu visita.",

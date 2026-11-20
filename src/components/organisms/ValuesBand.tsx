@@ -5,12 +5,14 @@ import { TextLink } from "@/components/atoms/TextLink";
 import { Reveal } from "@/components/molecules/Reveal";
 import type { Locale } from "@/i18n/routing";
 import { getPage, getValues } from "@/lib/content";
+import { capToLongestWord } from "@/lib/fitText";
 
 /** Our DNA on green: the six values set large in Mon Cheri capitals, each with its line. */
 export async function ValuesBand({ locale }: { locale: Locale }) {
   const values = getValues(locale);
   const page = getPage("dna", locale);
   const t = await getTranslations("home");
+  const nameSize = capToLongestWord("clamp(1.75rem, 0.9rem + 2.4vw, 2.25rem)", values.map((value) => value.name));
 
   return (
     <Section surface="green" aria-labelledby="values-title">
@@ -31,8 +33,8 @@ export async function ValuesBand({ locale }: { locale: Locale }) {
         <dl className="mt-14 grid gap-x-12 gap-y-12 sm:mt-20 sm:grid-cols-2 lg:grid-cols-3 lg:gap-y-16">
           {values.map((value, index) => (
             <Reveal key={value.id} delay={(index % 3) * 0.08} className="grid content-start gap-4 border-t border-rule pt-6">
-              {/* Sized so the longest value (EXPERIENTIAL, 12 capitals) fits its column at every width. */}
-              <dt className="font-display text-[clamp(1.75rem,0.9rem+2.4vw,2.25rem)] leading-none uppercase pt-[0.2em] sm:text-[clamp(1.5rem,0.6rem+2vw,2.25rem)]">
+              {/* Columns from sm up use a smaller size; on phones the longest word caps it (lib/fitText). */}
+              <dt className="pt-[0.2em] font-display leading-none uppercase sm:text-[clamp(1.5rem,0.6rem+2vw,2.25rem)]!" style={{ fontSize: nameSize }}>
                 {value.name}
               </dt>
               <dd className="type-body text-muted">{value.description}</dd>

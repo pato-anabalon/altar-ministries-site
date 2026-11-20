@@ -1,6 +1,9 @@
 {
   "common": {
-    "close": "Cerrar"
+    "close": "Cerrar",
+    "comingSoon": "Detalles muy pronto.",
+    "photoOf": "Foto: {name}",
+    "getInTouch": "Conversemos"
   },
   "metadata": {
     "title": "Altar Ministries · Una iglesia en Ponsonby, Auckland",
@@ -64,5 +67,41 @@
     "directions": "Cómo llegar",
     "online": "En línea",
     "onlineText": "¿No puedes venir? Acompáñanos en línea."
+  },
+  "visit": {
+    "sundayTitle": "Tu primer domingo",
+    "directions": "Cómo llegar",
+    "questions": "¿Tienes preguntas?",
+    "questionsText": "Llámanos y te ayudamos a planificar tu visita.",
+    "online": "Acompáñanos en línea",
+    "onlineText": "¿No puedes venir en persona? Míranos en línea o pídenos el enlace de Zoom para orar con nosotros los miércoles."
+  },
+  "about": {
+    "whoWeAre": "Quiénes somos",
+    "mission": "Nuestra misión",
+    "vision": "Nuestra visión",
+    "beliefs": "Lo que creemos",
+    "governance": "Gobierno espiritual",
+    "aspiration": "Nuestra aspiración",
+    "explore": "Conócenos más",
+    "history": "Nuestra historia",
+    "dna": "Nuestro ADN",
+    "leadership": "Líderes principales",
+    "parent": "Nosotros"
+  },
+  "leadership": {
+    "senior": "Líderes principales",
+    "elders": "Ancianos",
+    "pastorsInTraining": "Pastores en formación"
+  },
+  "community": {
+    "helpTitle": "¿Quieres recibir o ayudar?",
+    "helpText": "Consúltanos cómo recibir pan donado, apadrinar el regalo de un niño o dar una mano.",
+    "helpCta": "Consulta cómo ayudar"
+  },
+  "global": {
+    "partners": "Aliados en la fe",
+    "stayConnected": "Sigamos conectados",
+    "stayConnectedText": "Las noticias de Altar llegan a personas en muchos países. Suscríbete al boletín o escríbenos."
   }
 }

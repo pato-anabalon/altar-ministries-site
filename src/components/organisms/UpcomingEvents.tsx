@@ -3,7 +3,7 @@ import { Container } from "@/components/atoms/Container";
 import { Section } from "@/components/atoms/Section";
 import { TextLink } from "@/components/atoms/TextLink";
 import { Reveal } from "@/components/molecules/Reveal";
-import type { Locale } from "@/i18n/routing";
+import { formatLocales, type Locale } from "@/i18n/routing";
 import { getEvents, getPage } from "@/lib/content";
 
 /** The next events (at most three), each with its day set large. Empty state when none. */
@@ -12,7 +12,7 @@ export async function UpcomingEvents({ locale }: { locale: Locale }) {
   const events = upcoming.slice(0, 3);
   const page = getPage("events", locale);
   const t = await getTranslations("home");
-  const format = await getFormatter();
+  const format = await getFormatter({ locale: formatLocales[locale] });
 
   return (
     <Section aria-labelledby="events-title">

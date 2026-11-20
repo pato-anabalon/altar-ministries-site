@@ -23,9 +23,6 @@ export const routing = defineRouting({
     "/ministries/[slug]": { en: "/ministries/[slug]", es: "/ministerios/[slug]" },
     "/community": { en: "/community", es: "/comunidad" },
     "/global": "/global",
-    "/global/missions": { en: "/global/missions", es: "/global/misiones" },
-    "/global/community": { en: "/global/community", es: "/global/comunidad" },
-    "/global/partners": { en: "/global/partners", es: "/global/aliados" },
     "/events": { en: "/events", es: "/eventos" },
     "/events/[slug]": { en: "/events/[slug]", es: "/eventos/[slug]" },
     "/resources": { en: "/resources", es: "/recursos" },
@@ -36,3 +33,6 @@ export const routing = defineRouting({
 });
 
 export type AppPathname = keyof typeof routing.pathnames;
+
+/** Locale used to format dates, times and numbers: New Zealand English for "en" (e.g. "4:00 pm"). */
+export const formatLocales: Record<Locale, string> = { en: "en-NZ", es: "es" };
