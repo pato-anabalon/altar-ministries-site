@@ -17,7 +17,7 @@ Logo: PNG `public/images/logo/6–9-logo.png` (black, white, cream, green; trans
 Tone: majestic, intimate, peaceful, minimalist. Not a megachurch look.
 
 ## Nodo signature
-Every Nodo site has a preloader, a striking preloader → hero transition, a high-impact hero, and the footer credit "Built with 💚 by Nodo.co.nz". Here: arch-reveal preloader into a pinned hero where the arch grows to full screen (plan §1).
+Every Nodo site has a preloader, a striking preloader → hero transition, a high-impact hero, and the footer credit "Built with 💚 by Nodo.co.nz". Here: a Latin-cross window opens behind ALTAR in the preloader and becomes the pinned hero's window, which grows to full screen on scroll. The window, the cross in the photo and the T of ALTAR share one stem and one crossbar (measured live: `src/lib/motion/glyph.ts`, `crossAlign.ts`, `windowShape.ts`); the shape can be switched back to the gothic arch (plan §1).
 
 ## Content rules
 Never invent testimonials, people, dates, bios, numbers or quotes. Missing material → `<Placeholder>` with the final aspect ratio and a label. Spanish source texts are translated to English (en-NZ) pending client review.
@@ -28,7 +28,7 @@ Content lives in `src/content/data/*.ts`, every text as `{ en, es }`; read it on
 GSAP + `@gsap/react` (`useGSAP` with cleanup, scoped per section), Lenis for smooth scroll. Transform/opacity only. Honour `prefers-reduced-motion` with a static fallback. Preloader once per session, with a hard deadline.
 
 ## Git & deploy
-The owner commits and pushes; never commit or push. Review happens locally only (`npm run dev`); the project is connected to Vercel by the owner at launch, never deploy or link it.
+The owner commits and pushes; never commit or push. Code, comments, commit messages and PR descriptions are always in English (team conversation is in Spanish). Review happens locally only (`npm run dev`); the project is connected to Vercel by the owner at launch, never deploy or link it.
 
 ## Verify
 `npm run verify` (lint, typecheck, test, build). Also check 375/768/1024/1440 px, keyboard, reduced motion, no horizontal overflow, both locales.

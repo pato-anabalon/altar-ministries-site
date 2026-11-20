@@ -10,14 +10,14 @@ const LOGO_SIZE = { width: 284, height: 116 };
  * The real logo (with the waved "A") for header and footer. For a large "ALTAR", use Wordmark:
  * live text in TAN Mon Cheri stays sharp at any size.
  */
-export function Logo({ tone = "green", width = 132, priority = false, className }: { tone?: LogoTone; width?: number; priority?: boolean; className?: string }) {
+export function Logo({ tone = "green", width = 132, eager = false, className }: { tone?: LogoTone; width?: number; eager?: boolean; className?: string }) {
   return (
     <Image
       src={`/images/logo/altar-logo-${tone}.png`}
       alt="Altar Ministries"
       width={LOGO_SIZE.width}
       height={LOGO_SIZE.height}
-      priority={priority}
+      loading={eager ? "eager" : "lazy"}
       sizes={`${width}px`}
       style={{ width, height: "auto" }}
       className={cn("select-none", className)}

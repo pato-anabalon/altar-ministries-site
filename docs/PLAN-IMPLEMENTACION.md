@@ -59,12 +59,13 @@ Todas cargadas con `next/font/local` / `next/font/google` (self-hosted, `display
 
 Secuencia continua (sello de los sitios Nodo: preloader + transición + hero de impacto). Referencia de mecánica: https://image-showcase-pro-by-os.framer.website/
 
-1. **Preloader** (pantalla `green`): "ALTAR" en TAN Mon Cheri aparece letra a letra; "MINISTRIES" debajo con los puntos-destello de la "i" titilando.
-2. **Transición:** se abre un **arco ojival** al centro (clip-path) que revela la imagen del hero; el preloader se desvanece y ese arco queda como la imagen central.
+1. **Preloader** (pantalla `green`): "ALTAR" en TAN Mon Cheri aparece letra a letra; "MINISTRIES" debajo (Inter, espaciado que se cierra).
+2. **Transición:** detrás de ALTAR se abre una **ventana en forma de cruz latina** (máscara SVG) que crece desde el cruce de sus brazos hasta coincidir con la ventana del hero; el verde se desvanece y las letras del hero quedan en la misma posición exacta.
 3. **Hero (pinned, ~150–200vh, scrub):**
    - Fondo: Auckland al atardecer (skyline con Sky Tower) o St Stephen's.
-   - Centro: arco ojival con la cruz y el haz de luz.
-   - Al scrollear: "ALTAR" se divide a izquierda y derecha, el arco crece hasta pantalla completa (el arco se transforma en rectángulo), el fondo se desvanece/desenfoca.
+   - Centro: ventana en cruz con la foto de la cruz y el haz de luz, **detrás** de "ALTAR". Tres cruces alineadas: la T de ALTAR, la cruz de la foto y la ventana (mismo palo y mismo travesaño, medidos en vivo con las métricas de la fuente).
+   - Al scrollear: "AL" y "AR" se separan, la T baja con la cruz de la foto mientras se desvanece, la ventana se abre hasta pantalla completa (la cruz se convierte en rectángulo) y Auckland se desvanece.
+   - La forma es configurable: `HERO_WINDOW_SHAPE = "cross" | "arch"` en `src/lib/motion/windowShape.ts` (tamaño: `CROSS_SCALE`).
    - Al final: "A church in Ponsonby, Auckland" + CTAs *Plan your visit* / *Watch online*.
 4. Justo después: InfoBar (horario · dirección · cómo llegar).
 
@@ -230,7 +231,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 - Fotos: revelado con máscara en forma de **arco** (clip-path) + leve parallax.
 - Secciones: fade/translate sutil en stagger.
 - Preloader → hero: secuencia de la sección 1 ("Firma Nodo").
-- Hero: pin + scrub, arco ojival que se expande a pantalla completa, título dividido.
+- Hero: pin + scrub, ventana en cruz que se expande a pantalla completa, letras que se separan, T que baja con la cruz.
 - Modal de ministerio: entrada con escala/opacidad, foco atrapado.
 - Header: se oculta al bajar y aparece al subir; cambia de transparente a crema.
 - `prefers-reduced-motion`: desactiva Lenis y deja solo fades instantáneos.
@@ -255,7 +256,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 | 1 | Sistema de diseño ✅ | Escala tipográfica, superficies (cream/white/green/ink), Button, TextLink, Container, Section, Placeholder, Logo, Wordmark, Modal; `/[locale]/dev/styleguide` (solo dev) |
 | 2 | Layout ✅ | Header (transparente sobre hero oscuro → crema; se oculta al bajar), menú móvil (`<dialog>` verde), Footer con wordmark y crédito Nodo, LocaleSwitcher con slugs traducidos, skip link, Lenis + GSAP (`lib/motion`) |
 | 3 | Capa de contenido ✅ | `src/content/data/*.ts` bilingües (`{ en, es }`), schemas zod + `lib/content` (getters por idioma, validación al build), estado `pending` (visible en dev, oculto en prod), slugs traducidos para ministerios/eventos, MDX configurado; textos EN/ES del prototipo + perfil |
-| 4 | Preloader + Hero | Preloader, transición del arco y hero pinned (con imágenes provisionales hasta tener las finales) |
+| 4 | Preloader + Hero ✅ | `AltarPreloader` (1 vez por sesión, boot script en `<head>`, deadline 5,5 s + failsafe CSS 6 s), ventana en cruz compartida (`lib/motion/windowShape.ts`, arco disponible en `arch.ts`), `HomeHero` pinned 180 % con scrub (ALTAR delante de la ventana; ventana y cruz de la foto alineadas con la T midiendo la fuente en vivo, `lib/motion/glyph.ts` + `crossAlign.ts`), imágenes art-directed (desktop/móvil), `InfoBar`; estado final estático sin JS / reduced motion |
 | 4b | Home | Resto de secciones de Home |
 | 5 | Páginas institucionales | Visit, About (+ History, DNA, Leadership), Community, Global |
 | 6 | Ministries | Grilla + modal con URL propia (intercepting routes) |

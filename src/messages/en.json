@@ -7,8 +7,7 @@
     "description": "Altar Ministries is a young church community in Ponsonby, Auckland. Come as you are and discover what an Experience is like."
   },
   "home": {
-    "tagline": "A church in Ponsonby, Auckland",
-    "comingSoon": "Our new website is on its way."
+    "scrollCue": "Scroll to enter"
   },
   "notFound": {
     "title": "Page not found",
@@ -47,5 +46,12 @@
     "creditBefore": "Built with",
     "creditAfter": "by",
     "heartLabel": "love"
+  },
+  "infoBar": {
+    "title": "When and where we meet",
+    "where": "Where",
+    "directions": "Get directions",
+    "online": "Online",
+    "onlineText": "Can’t be there? Join us online."
   }
 }

@@ -4,10 +4,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { AltarPreloader } from "@/components/organisms/AltarPreloader";
 import { Footer } from "@/components/organisms/Footer";
 import { Header } from "@/components/organisms/Header";
 import { SmoothScroll } from "@/components/organisms/SmoothScroll";
 import { routing } from "@/i18n/routing";
+import { BOOT_SCRIPT } from "@/lib/motion/preloader";
 import { site } from "@/lib/site";
 import { fontVariables } from "../fonts";
 import "../globals.css";
@@ -41,7 +43,11 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   const t = await getTranslations({ locale, namespace: "header" });
 
   return (
-    <html lang={locale} className={fontVariables}>
+    // The boot script sets html.motion and data-preloader before paint, hence suppressHydrationWarning.
+    <html lang={locale} className={fontVariables} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
+      </head>
       <body>
         <NextIntlClientProvider>
           <a
@@ -50,7 +56,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           >
             {t("skipToContent")}
           </a>
+          {/* SmoothScroll first: the preloader pauses the Lenis instance it creates. */}
           <SmoothScroll />
+          <AltarPreloader />
           <Header />
           <main id="main" tabIndex={-1} className="outline-none">
             {children}

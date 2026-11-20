@@ -1,22 +1,31 @@
-import { useTranslations } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
-import { use } from "react";
-import { Wordmark } from "@/components/atoms/Wordmark";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { HomeHero } from "@/components/organisms/HomeHero";
+import { InfoBar } from "@/components/organisms/InfoBar";
 import type { Locale } from "@/i18n/routing";
+import { getPage } from "@/lib/content";
+import { site } from "@/lib/site";
 
-/** Placeholder until the real Home (milestone 4): dark band so the overlay header can be reviewed. */
-export default function HomePage({ params }: PageProps<"/[locale]">) {
-  const { locale } = use(params);
+/** Home. Milestone 4: hero + info bar; the remaining sections arrive in milestone 4b. */
+export default async function HomePage({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
   setRequestLocale(locale as Locale);
-  const t = useTranslations("home");
+  const page = getPage("home", locale as Locale);
+  const t = await getTranslations("header");
+  const tHome = await getTranslations("home");
 
   return (
-    <div data-surface="green" className="flex min-h-svh flex-col items-center justify-center gap-8 px-4 text-center">
-      <h1>
-        <Wordmark className="text-[clamp(5rem,20vw,13rem)]" />
-      </h1>
-      <p className="type-lead">{t("tagline")}</p>
-      <p className="type-small text-muted">{t("comingSoon")}</p>
-    </div>
+    <>
+      <HomeHero
+        copy={{
+          title: page.title,
+          intro: page.intro ?? "",
+          planVisit: t("planVisit"),
+          watchOnline: t("watchOnline"),
+          scrollCue: tHome("scrollCue"),
+          streamUrl: site.streamUrl,
+        }}
+      />
+      <InfoBar />
+    </>
   );
 }

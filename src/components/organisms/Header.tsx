@@ -68,7 +68,7 @@ export function Header() {
       >
         <Container className="flex h-20 items-center justify-between gap-6">
           <Link href="/" aria-label={t("home")} className="shrink-0">
-            <Logo tone={overlay ? "cream" : "green"} width={118} priority />
+            <Logo tone={overlay ? "cream" : "green"} width={118} eager />
           </Link>
 
           <nav aria-label={t("mainNav")} className="hidden xl:block">
