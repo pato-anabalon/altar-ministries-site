@@ -99,7 +99,8 @@ export function AltarPreloader() {
   if (gone) return null;
 
   return (
-    <div ref={root} aria-hidden data-surface="green" className="altar-preloader fixed inset-0 z-[60] bg-transparent text-cream">
+    // Same frame as the hero (h-lvh) so ALTAR hands over without a jump on phones with browser bars.
+    <div ref={root} aria-hidden data-surface="green" className="altar-preloader fixed inset-x-0 top-0 h-lvh z-[60] bg-transparent text-cream">
       <svg className="absolute inset-0 size-full" aria-hidden>
         <defs>
           <mask id="altar-preloader-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="100%" height="100%">
