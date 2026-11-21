@@ -82,6 +82,14 @@ describe("pending content", () => {
     expect(isPublished({ status: "confirmed" })).toBe(true);
   });
 
+  it("is shown on the Vercel test site and hidden on the production deployment", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("VERCEL_ENV", "preview");
+    expect(isPublished({ status: "pending" })).toBe(true);
+    vi.stubEnv("VERCEL_ENV", "production");
+    expect(isPublished({ status: "pending" })).toBe(false);
+  });
+
   it("leaves unconfirmed milestones out of production", () => {
     vi.stubEnv("NODE_ENV", "production");
     expect(getHistory("en").map((milestone) => milestone.id)).not.toContain("nexus-initiative");

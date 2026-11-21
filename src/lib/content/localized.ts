@@ -38,10 +38,12 @@ export function resolve<T>(value: T, locale: Locale): Resolved<T> {
 
 /**
  * Publishing state for facts the client still has to confirm. `pending` items render in
- * development (so they can be reviewed in context) and are left out of production builds.
+ * development and on the test site (Vercel preview, `develop` branch) so they can be reviewed in
+ * context, and are left out of production: the `main` deployment and local production builds.
  */
 export const status = z.enum(["confirmed", "pending"]).default("confirmed");
 
 export function isPublished(item: { status?: "confirmed" | "pending" }) {
-  return item.status !== "pending" || process.env.NODE_ENV !== "production";
+  const preview = Boolean(process.env.VERCEL_ENV) && process.env.VERCEL_ENV !== "production";
+  return item.status !== "pending" || process.env.NODE_ENV !== "production" || preview;
 }

@@ -28,7 +28,7 @@ Content lives in `src/content/data/*.ts`, every text as `{ en, es }`; read it on
 GSAP + `@gsap/react` (`useGSAP` with cleanup, scoped per section), Lenis for smooth scroll. Transform/opacity only. Honour `prefers-reduced-motion` with a static fallback. Preloader once per session, with a hard deadline.
 
 ## Git & deploy
-The owner commits and pushes; never commit or push. Code, comments, commit messages and PR descriptions are always in English (team conversation is in Spanish). Review happens locally only (`npm run dev`); the project is connected to Vercel by the owner at launch, never deploy or link it.
+The owner commits and pushes; never commit or push. Branches: `develop` deploys the test site (Vercel Preview, pending content visible, not indexed), `main` deploys production; see `docs/LANZAMIENTO.md`. Code, comments, commit messages and PR descriptions are always in English (team conversation is in Spanish). Review happens locally only (`npm run dev`); the project is connected to Vercel by the owner at launch, never deploy or link it.
 
 ## Verify
 `npm run verify` (lint, typecheck, test, build). `npm run test:e2e` (Playwright on a production build) runs axe WCAG 2.2 AA on every sitemap page in both locales, checks overflow at 375/768/1024/1440 px, the forms, the ministry modal, the language switcher and the skip link; new pages are covered once they are in the sitemap. Still look at motion (preloader, hero) by eye: e2e runs with reduced motion.
