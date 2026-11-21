@@ -131,7 +131,10 @@ export function HomeHero({ copy }: { copy: HomeHeroCopy }) {
   );
 
   return (
-    <section ref={root} data-surface="ink" data-header-overlay aria-labelledby="home-title" className="relative h-svh overflow-hidden">
+    // Large viewport height: when a phone's browser bars collapse on scroll the pinned hero still
+    // fills the screen (with svh a strip of the next section showed below it). Bottom-anchored
+    // content is lifted by the bars' height so it stays visible while they are shown.
+    <section ref={root} data-surface="ink" data-header-overlay aria-labelledby="home-title" className="relative h-lvh overflow-hidden">
       <div data-hero-bg className="absolute inset-0 will-change-transform">
         <HeroPicture image={auckland} className="size-full object-cover" />
       </div>
@@ -155,7 +158,7 @@ export function HomeHero({ copy }: { copy: HomeHeroCopy }) {
         </defs>
       </svg>
 
-      <div className="absolute inset-x-0 bottom-0 pb-14 sm:pb-20">
+      <div className="absolute inset-x-0 bottom-[calc(100lvh-100svh)] pb-14 sm:pb-20">
         <Container>
           {/* Kept to the left column so the cross at the centre of the frame stays clear. */}
           <div data-hero-copy className="altar-hero-copy grid justify-items-start gap-6 portrait:max-w-xl landscape:max-w-[min(40rem,44vw)]">
@@ -175,7 +178,7 @@ export function HomeHero({ copy }: { copy: HomeHeroCopy }) {
         </Container>
       </div>
 
-      <div data-hero-cue aria-hidden className="altar-hero-cue absolute inset-x-0 bottom-6 flex flex-col items-center gap-3 type-small text-cream">
+      <div data-hero-cue aria-hidden className="altar-hero-cue absolute inset-x-0 bottom-[calc(100lvh-100svh+1.5rem)] flex flex-col items-center gap-3 type-small text-cream">
         <span>{copy.scrollCue}</span>
         <span className="altar-scroll-line h-10 w-px bg-current" />
       </div>
