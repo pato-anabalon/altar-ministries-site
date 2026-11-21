@@ -72,7 +72,7 @@
     "sundayTitle": "Tu primer domingo",
     "directions": "Cómo llegar",
     "questions": "¿Tienes preguntas?",
-    "questionsText": "Llámanos y te ayudamos a planificar tu visita.",
+    "questionsText": "Llámanos, escríbenos o déjanos un mensaje, y te ayudamos a planificar tu visita.",
     "online": "Acompáñanos en línea",
     "onlineText": "¿No puedes venir en persona? Míranos en línea o pídenos el enlace de Zoom para orar con nosotros los miércoles."
   },
@@ -154,13 +154,13 @@
     "consentNewsletter": "Acepto recibir el boletín de Altar Ministries. Puedo darme de baja cuando quiera.",
     "subscribe": "Suscribirme",
     "subscribing": "Suscribiendo…",
-    "subscribedTitle": "Ya estás suscrito.",
+    "subscribedTitle": "Tu suscripción está lista.",
     "subscribedText": "Gracias por seguir en contacto con Altar.",
     "errors": {
       "required": "Este campo es obligatorio.",
       "email": "Escribe un correo válido.",
       "tooShort": "Escribe un poco más, por favor.",
-      "tooLong": "Es demasiado largo.",
+      "tooLong": "Es demasiado largo. Acórtalo, por favor.",
       "consent": "Marca la casilla para poder continuar."
     }
   },

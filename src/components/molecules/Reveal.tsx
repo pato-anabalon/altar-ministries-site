@@ -26,7 +26,9 @@ export function Reveal({ children, variant = "rise", delay = 0, className }: { c
         const scrollTrigger = { trigger: el, start: "top 85%", once: true };
         if (variant === "photo") {
           gsap.fromTo(el, { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.4, delay, ease: "expo.inOut", scrollTrigger });
-          gsap.fromTo(el.querySelector("img"), { scale: 1.12 }, { scale: 1, duration: 1.8, delay, ease: "expo.out", scrollTrigger });
+          // Placeholders (photos still to come) have no <img> to settle.
+          const img = el.querySelector("img");
+          if (img) gsap.fromTo(img, { scale: 1.12 }, { scale: 1, duration: 1.8, delay, ease: "expo.out", scrollTrigger });
         } else {
           gsap.fromTo(el, { y: 28, opacity: 0 }, { y: 0, opacity: 1, duration: 1.1, delay, ease: "expo.out", scrollTrigger });
         }

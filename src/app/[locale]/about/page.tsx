@@ -123,7 +123,7 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
               <li key={item.href} className="border-t border-rule">
                 <Link href={item.href} className="group flex items-center justify-between gap-6 py-7">
                   <span className="grid gap-1">
-                    <span className="pt-[0.2em] font-display leading-none uppercase" style={{ fontSize: exploreSize }}>
+                    <span className="pt-[0.2em] font-display leading-[1.2] uppercase" style={{ fontSize: exploreSize }}>
                       {item.label}
                     </span>
                     <span className="type-small text-muted">{item.detail}</span>

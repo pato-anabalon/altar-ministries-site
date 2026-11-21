@@ -13,7 +13,10 @@ npm install
 cp .env.example .env.local   # fill in RESEND_API_KEY
 npm run dev                  # http://localhost:3000 → redirects to /en
 npm run verify               # lint, typecheck, tests, build
+npm run test:e2e             # build + Playwright: axe (WCAG 2.2 AA), overflow, forms, modal
 ```
+
+First time only: `npx playwright install chromium`.
 
 Stack: Next.js 16, Tailwind CSS 4, next-intl, GSAP + Lenis, zod, Resend. Hosted on Vercel.
 

@@ -231,7 +231,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 - Preloader → hero: secuencia de la sección 1 ("Firma Nodo").
 - Hero: pin + scrub, ventana en cruz que se expande a pantalla completa, letras que se separan, T que baja con la cruz.
 - Modal de ministerio: entrada con escala/opacidad, foco atrapado.
-- Header: se oculta al bajar y aparece al subir; cambia de transparente a crema.
+- Header: siempre visible; transparente mientras el hero oscuro está detrás, luego crema.
 - `prefers-reduced-motion`: desactiva Lenis y deja solo fades instantáneos.
 - Todo vía `useGSAP` con cleanup; ScrollTrigger solo en client components hoja.
 
@@ -252,15 +252,15 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 |---|---|---|
 | 0 | Setup ✅ | Repo local, Next.js + Tailwind v4 + next-intl, fuentes, tokens, lint/tests (revisión solo en local) |
 | 1 | Sistema de diseño ✅ | Escala tipográfica, superficies (cream/white/green/ink), Button, TextLink, Container, Section, Placeholder, Logo, Wordmark, Modal; `/[locale]/dev/styleguide` (solo dev) |
-| 2 | Layout ✅ | Header (transparente sobre hero oscuro → crema; se oculta al bajar), menú móvil (`<dialog>` verde), Footer con wordmark y crédito Nodo, LocaleSwitcher con slugs traducidos, skip link, Lenis + GSAP (`lib/motion`) |
+| 2 | Layout ✅ | Header (transparente sobre hero oscuro → crema; siempre visible), menú móvil (`<dialog>` verde), Footer con wordmark y crédito Nodo, LocaleSwitcher con slugs traducidos, skip link, Lenis + GSAP (`lib/motion`) |
 | 3 | Capa de contenido ✅ | `src/content/data/*.ts` bilingües (`{ en, es }`), schemas zod + `lib/content` (getters por idioma, validación al build), estado `pending` (visible en dev, oculto en prod), slugs traducidos para ministerios/eventos, MDX configurado; textos EN/ES del prototipo + perfil |
 | 4 | Preloader + Hero ✅ | `AltarPreloader` (1 vez por sesión, boot script en `<head>`, deadline 5,5 s + failsafe CSS 6 s), ventana en cruz compartida (`lib/motion/windowShape.ts`, arco disponible en `arch.ts`), `HomeHero` pinned 180 % con scrub (ALTAR delante de la ventana; ventana y cruz de la foto alineadas con la T midiendo la fuente en vivo, `lib/motion/glyph.ts` + `crossAlign.ts`), imágenes art-directed (desktop/móvil), `InfoBar`; estado final estático sin JS / reduced motion |
 | 4b | Home ✅ | Frase de Experiencias + fotos, lista de Experiences, ADN (verde), ministerios como links, Comunidad, Mensajes (video placeholder), próximos eventos (hora de Auckland), "Sigamos en contacto"; revelado único `Reveal` (rise/photo). Sin trío "Connect" (redundante); formulario de boletín en el hito 8 |
 | 5 | Páginas institucionales ✅ | Visit (domingo en grande, Experiences, en línea, teléfonos), About (+ History, DNA, Leadership), Community, Global en una sola página (sin subrutas: cada área tenía un párrafo). `PageHeader`, metadatos con canonical + hreflang (`lib/seo.ts`), títulos Mon Cheri que nunca desbordan en móvil (`lib/fitText.ts`), fechas en `en-NZ` |
 | 6 | Ministries ✅ | Grilla por grupos (etapas de vida / servir) + modal con URL propia vía History API (`pushState`; el modal está abierto mientras la URL es la de un ministerio); página completa prerenderizada por idioma con slug traducido y hreflang; 404 para slugs desconocidos. Intercepting routes descartadas: frágiles con las URLs traducidas de next-intl |
 | 7 | Events + Resources ✅ | Eventos: listado (próximos / anteriores) y detalle por idioma con slug traducido; fechas según precisión (`lib/events.ts`); revalidación diaria por ISR (`revalidate = 86400`, también en la Home) en vez de cron; registro de cuerpos MDX (`src/content/events/index.ts`). Resources (4 categorías), Policies (8 documentos) y Newsletter sin archivos aún ("muy pronto"); el formulario del boletín llega en el hito 8 |
-| 8 | Contact + forms | Formulario de contacto y newsletter con Resend |
-| 9 | Pulido | Animaciones finas, SEO, a11y, performance, QA móvil, revisión de textos EN/ES |
+| 8 | Contact + forms ✅ | `/api/contact` (Resend, `replyTo` del visitante, tema + contexto + idioma) y `/api/newsletter` (contacto en el segmento de Resend del idioma elegido, o aviso por correo si no hay segmentos). Schemas zod compartidos con el navegador (`lib/forms.ts`), errores en línea accesibles, honeypot y límite por IP. Sin claves: simulado en desarrollo, 503 en producción. Botones "Consulta por este equipo/evento" pasan `?about=&topic=` al formulario. Variables en `.env.example` |
+| 9 | Pulido ✅ | SEO: `sitemap.xml` bilingüe con hreflang (incluye ministerios y eventos), `robots.txt`, JSON-LD `Church` con dirección y Experiencia del domingo (`lib/jsonld.ts`), imagen para compartir por idioma (`[locale]/opengraph-image.tsx`, cruz + ALTAR en Mon Cheri) y tarjeta grande en X. Playwright + axe (`npm run test:e2e`): WCAG 2.2 AA en todas las páginas del sitemap, sin desborde en 375–1440 px, formularios, modal, idioma, skip link, 404. Arreglos: `<dl>` inválido en eventos, avisos de GSAP con placeholders, alineación de campos con error, chevron del select. Lighthouse local: páginas internas ~91–92 en rendimiento; en la Home el LCP llega con el preloader (~3.4 s, solo la primera visita de la sesión). Textos EN/ES revisados |
 | 10 | Lanzamiento | Pato conecta el proyecto a Vercel, dominio altar.org.nz, variables de entorno, redirects, analítica |
 
 ---
@@ -270,5 +270,5 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 - [x] Fuente de cuerpo/UI: Inter (light 300 para párrafos)
 - [x] Hay transmisión online → CTA "Watch online" en header/hero + sección Messages en Home + Sermons en Resources
 - [ ] Plataforma y URL de la transmisión (YouTube, Facebook, Instagram Live…) y si es en vivo cada domingo o solo grabada
-- [ ] Plataforma de newsletter (Resend Audiences vs. otra)
+- [x] Plataforma de newsletter: Resend (contactos + segmentos por idioma)
 - [ ] Revisión por el cliente de la traducción EN

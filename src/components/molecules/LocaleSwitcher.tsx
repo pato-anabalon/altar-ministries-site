@@ -1,8 +1,8 @@
 "use client";
 
-import type { ComponentProps } from "react";
 import { useParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
+import type { ComponentProps } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { locales, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/cn";

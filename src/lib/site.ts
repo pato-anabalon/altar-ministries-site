@@ -14,6 +14,8 @@ export const site = {
     suburb: "Ponsonby, Auckland",
     mapsUrl: "https://www.google.com/maps/search/?api=1&query=St+Stephen%27s+Presbyterian+Church%2C+65+Jervois+Road%2C+Ponsonby%2C+Auckland",
   },
+  /** Sunday Experience in 24 h Auckland time, for structured data (the pages show `pages.visit` times). */
+  sunday: { coffee: "12:00", start: "13:00" },
   /** Phone numbers as the client writes them; `href` is the dialable form. */
   phones: [
     { label: "0800 ALTAR NZ", href: "tel:+648002582769" },

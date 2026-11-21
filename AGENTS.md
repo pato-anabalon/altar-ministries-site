@@ -31,7 +31,7 @@ GSAP + `@gsap/react` (`useGSAP` with cleanup, scoped per section), Lenis for smo
 The owner commits and pushes; never commit or push. Code, comments, commit messages and PR descriptions are always in English (team conversation is in Spanish). Review happens locally only (`npm run dev`); the project is connected to Vercel by the owner at launch, never deploy or link it.
 
 ## Verify
-`npm run verify` (lint, typecheck, test, build). Also check 375/768/1024/1440 px, keyboard, reduced motion, no horizontal overflow, both locales.
+`npm run verify` (lint, typecheck, test, build). `npm run test:e2e` (Playwright on a production build) runs axe WCAG 2.2 AA on every sitemap page in both locales, checks overflow at 375/768/1024/1440 px, the forms, the ministry modal, the language switcher and the skip link; new pages are covered once they are in the sitemap. Still look at motion (preloader, hero) by eye: e2e runs with reduced motion.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

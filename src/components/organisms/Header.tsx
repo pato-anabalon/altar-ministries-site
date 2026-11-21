@@ -13,14 +13,13 @@ import { cn } from "@/lib/cn";
 import { isActive, mainNav, overlayHeaderPaths } from "@/lib/nav";
 import { site } from "@/lib/site";
 
-/** Past this many pixels the header turns solid; past HIDE_AFTER it hides while scrolling down. */
+/** Past this many pixels the header turns solid (pages without an overlay hero). */
 const SOLID_AFTER = 24;
-const HIDE_AFTER = 200;
 
 /**
- * Fixed header. Over a dark hero (overlayHeaderPaths) it starts transparent with cream type, then
- * turns solid cream once the page scrolls. It slides away while reading down and returns on the
- * first scroll up or when keyboard focus enters it.
+ * Fixed header. Over a dark hero (overlayHeaderPaths) it stays transparent with cream type for as
+ * long as the hero (marked `data-header-overlay`, pinned or not) is behind it, then turns solid
+ * cream. Elsewhere it turns solid once the page scrolls. It always stays in view.
  */
 export function Header() {
   const t = useTranslations("header");
@@ -29,18 +28,14 @@ export function Header() {
   const menuId = useId();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
-  const lastY = useRef(0);
+  const header = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
-      const y = window.scrollY;
-      setScrolled(y > SOLID_AFTER);
-      if (y > HIDE_AFTER && y > lastY.current + 4) setHidden(true);
-      else if (y < lastY.current - 4 || y <= HIDE_AFTER) setHidden(false);
-      lastY.current = y;
+      const hero = document.querySelector("[data-header-overlay]");
+      setScrolled(hero ? hero.getBoundingClientRect().bottom <= (header.current?.offsetHeight ?? 0) : window.scrollY > SOLID_AFTER);
     };
     const onScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
@@ -58,12 +53,12 @@ export function Header() {
   return (
     <>
       <header
+        ref={header}
         data-surface={overlay ? "green" : "cream"}
-        onFocusCapture={() => setHidden(false)}
         className={cn(
-          "fixed inset-x-0 top-0 z-40 transition-[translate,background-color,color,border-color] duration-500 ease-out-expo",
-          overlay ? "border-b border-transparent bg-transparent" : "border-b border-rule",
-          hidden && !menuOpen && "-translate-y-full",
+          "fixed inset-x-0 top-0 z-40 transition-[background-color,color,border-color,backdrop-filter] duration-500 ease-out-expo",
+          // Over the hero a light blur and tint keep the links legible when hero type passes beneath.
+          overlay ? "border-b border-transparent bg-ink/15 backdrop-blur-md" : "border-b border-rule",
         )}
       >
         <Container className="flex h-20 items-center justify-between gap-6">

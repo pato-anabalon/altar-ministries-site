@@ -131,7 +131,7 @@ export function HomeHero({ copy }: { copy: HomeHeroCopy }) {
   );
 
   return (
-    <section ref={root} data-surface="ink" aria-labelledby="home-title" className="relative h-svh overflow-hidden">
+    <section ref={root} data-surface="ink" data-header-overlay aria-labelledby="home-title" className="relative h-svh overflow-hidden">
       <div data-hero-bg className="absolute inset-0 will-change-transform">
         <HeroPicture image={auckland} className="size-full object-cover" />
       </div>

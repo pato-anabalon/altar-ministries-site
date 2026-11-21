@@ -21,3 +21,8 @@ npm-debug.log*
 # Original, heavy and private source assets (client documents, full-size hero sources).
 # Anything in public/ is served on the site; the site uses optimised copies there.
 design-source
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/

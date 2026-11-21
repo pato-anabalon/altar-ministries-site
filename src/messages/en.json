@@ -72,7 +72,7 @@
     "sundayTitle": "Your first Sunday",
     "directions": "Get directions",
     "questions": "Questions?",
-    "questionsText": "Call us and we’ll help you plan your visit.",
+    "questionsText": "Call us, email us or send us a message, and we’ll help you plan your visit.",
     "online": "Join us online",
     "onlineText": "Can’t make it in person? Watch online, or ask us for the Zoom link to pray with us on Wednesdays."
   },
@@ -160,7 +160,7 @@
       "required": "This field is required.",
       "email": "Enter a valid email address.",
       "tooShort": "Please write a little more.",
-      "tooLong": "This is too long.",
+      "tooLong": "This is too long. Please shorten it.",
       "consent": "Please tick the box so we can go ahead."
     }
   },

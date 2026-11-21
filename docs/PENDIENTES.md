@@ -48,8 +48,8 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 
 - [ ] Cuentas de editores / CMS y control de acceso
 - [ ] Almacenamiento compartido (audios, PDFs, imágenes)
-- [ ] Envío de formularios (a qué correo / herramienta)
-- [ ] Plataforma de newsletter (cuenta, texto de consentimiento, primera edición)
+- [ ] Envío de formularios: Resend ya integrado; falta la cuenta, verificar el dominio altar.org.nz (remitente `CONTACT_FROM_EMAIL`), confirmar el correo de destino (`CONTACT_TO_EMAIL`, hoy contact@altar.org.nz temporal) y cargar las variables en Vercel
+- [ ] Newsletter: crear los segmentos EN/ES en Resend (`RESEND_NEWSLETTER_SEGMENT_EN/_ES`), aprobar el texto de consentimiento y preparar la primera edición
 - [ ] Calendario en vivo de eventos
 - [ ] Redes sociales (Instagram y otras)
 - [ ] Feeds de futuras iglesias plantadas

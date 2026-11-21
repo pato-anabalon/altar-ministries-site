@@ -31,7 +31,7 @@ export default async function DnaPage({ params }: PageProps<"/[locale]/about/dna
           <dl className="border-b border-rule">
             {values.map((value) => (
               <Reveal key={value.id} className="grid gap-4 border-t border-rule py-10 md:grid-cols-[minmax(0,6fr)_minmax(0,6fr)] md:items-baseline md:gap-10">
-                <dt className="pt-[0.2em] font-display leading-none uppercase" style={{ fontSize: nameSize }}>
+                <dt className="pt-[0.2em] font-display leading-[1.2] uppercase" style={{ fontSize: nameSize }}>
                   {value.name}
                 </dt>
                 <dd className="type-lead measure text-muted">{value.description}</dd>

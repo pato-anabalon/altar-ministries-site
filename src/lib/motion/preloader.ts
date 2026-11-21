@@ -9,7 +9,24 @@
 export const PRELOADER_KEY = "altar-preloader-seen";
 export const PRELOADER_DONE_EVENT = "altar:preloader-done";
 
-export const BOOT_SCRIPT = `(function(){var d=document.documentElement;try{var m=window.matchMedia("(prefers-reduced-motion: no-preference)").matches;if(m)d.classList.add("motion");d.dataset.preloader=m&&!sessionStorage.getItem("${PRELOADER_KEY}")?"pending":"done"}catch(e){d.dataset.preloader="done"}})();`;
+/** Self-contained (it is serialised into BOOT_SCRIPT): only its argument and browser globals. */
+function boot(key: string) {
+  const html = document.documentElement;
+  try {
+    const motion = window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
+    if (motion) html.classList.add("motion");
+    html.dataset.preloader = motion && !sessionStorage.getItem(key) ? "pending" : "done";
+  } catch {
+    html.dataset.preloader = "done";
+  }
+}
+
+export const BOOT_SCRIPT = `(${boot.toString()})(${JSON.stringify(PRELOADER_KEY)});`;
+
+/** The same state applied from React, for when the layout remounts on the client (language switch). */
+export function applyBootState() {
+  if (!document.documentElement.dataset.preloader) boot(PRELOADER_KEY);
+}
 
 export function markPreloaderDone() {
   try {

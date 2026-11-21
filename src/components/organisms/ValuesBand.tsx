@@ -34,7 +34,7 @@ export async function ValuesBand({ locale }: { locale: Locale }) {
           {values.map((value, index) => (
             <Reveal key={value.id} delay={(index % 3) * 0.08} className="grid content-start gap-4 border-t border-rule pt-6">
               {/* Columns from sm up use a smaller size; on phones the longest word caps it (lib/fitText). */}
-              <dt className="pt-[0.2em] font-display leading-none uppercase sm:text-[clamp(1.5rem,0.6rem+2vw,2.25rem)]!" style={{ fontSize: nameSize }}>
+              <dt className="pt-[0.2em] font-display leading-[1.2] uppercase sm:text-[clamp(1.5rem,0.6rem+2vw,2.25rem)]!" style={{ fontSize: nameSize }}>
                 {value.name}
               </dt>
               <dd className="type-body text-muted">{value.description}</dd>

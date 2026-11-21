@@ -5,33 +5,31 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/atoms/Button";
 import { TextLink } from "@/components/atoms/TextLink";
-import { controlClasses, FormField } from "@/components/molecules/FormField";
-import { CONTACT_TOPICS, contactSchema, fieldErrors, HONEYPOT, type ContactInput, type FieldErrors, type FormResult } from "@/lib/forms";
+import { controlClasses, FormField, Select } from "@/components/molecules/FormField";
+import { CONTACT_TOPICS, contactSchema, fieldErrors, HONEYPOT, type ContactInput, type FormResult } from "@/lib/forms";
 import { site } from "@/lib/site";
+import { useFormErrors } from "@/lib/useFormErrors";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
 /**
  * Contact form. Validates with the same schema as /api/contact, shows errors inline and moves
  * focus to the first one; success replaces the form with a thank-you. `?about=` and `?topic=` (set
- * by the "Ask about this team/event" buttons) carry the context to the church.
+ * by the "Ask about this team/event" buttons) carry the context to the church; `defaultTopic` presets
+ * the topic where the page already says it (Plan your visit).
  */
-export function ContactForm() {
+export function ContactForm({ defaultTopic }: { defaultTopic?: (typeof CONTACT_TOPICS)[number] } = {}) {
   const t = useTranslations("forms");
   const locale = useLocale();
   const searchParams = useSearchParams();
   const about = searchParams.get("about")?.slice(0, 120) ?? "";
-  const presetTopic = CONTACT_TOPICS.find((topic) => topic === searchParams.get("topic")) ?? "";
+  const presetTopic = CONTACT_TOPICS.find((topic) => topic === searchParams.get("topic")) ?? defaultTopic ?? "";
   const id = useId();
   const form = useRef<HTMLFormElement>(null);
-  const [errors, setErrors] = useState<FieldErrors<ContactInput>>({});
-  const [status, setStatus] = useState<Status>("idle");
-  const [failure, setFailure] = useState<string>("");
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const input = {
+  // Raw values; the schema decides what is valid.
+  const read = (target: HTMLFormElement) => {
+    const data = new FormData(target);
+    return {
       name: String(data.get("name") ?? ""),
       email: String(data.get("email") ?? ""),
       phone: String(data.get("phone") ?? ""),
@@ -40,7 +38,18 @@ export function ContactForm() {
       about,
       consent: data.get("consent") === "on",
     };
-    const parsed = contactSchema.safeParse(input);
+  };
+  const { errors, setErrors, onChange } = useFormErrors<ContactInput>((target) => {
+    const parsed = contactSchema.safeParse(read(target));
+    return parsed.success ? {} : fieldErrors(parsed.error);
+  });
+  const [status, setStatus] = useState<Status>("idle");
+  const [failure, setFailure] = useState<string>("");
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const parsed = contactSchema.safeParse(read(event.currentTarget));
     if (!parsed.success) {
       setErrors(fieldErrors(parsed.error));
       requestAnimationFrame(() => form.current?.querySelector<HTMLElement>("[aria-invalid=true]")?.focus());
@@ -75,7 +84,7 @@ export function ContactForm() {
   const error = (field: keyof ContactInput) => (errors[field] ? t(`errors.${errors[field]}`) : undefined);
 
   return (
-    <form ref={form} noValidate onSubmit={submit} className="grid gap-6">
+    <form ref={form} noValidate onSubmit={submit} onChange={onChange} className="grid gap-6">
       {about && <p className="type-ui">{t("about", { about })}</p>}
 
       <div className="grid gap-6 sm:grid-cols-2">
@@ -108,11 +117,10 @@ export function ContactForm() {
         </FormField>
         <FormField id={`${id}-topic`} label={t("topic")} error={error("topic")}>
           {(describedBy) => (
-            <select
+            <Select
               id={`${id}-topic`}
               name="topic"
               defaultValue={presetTopic}
-              className={controlClasses}
               aria-invalid={Boolean(errors.topic)}
               aria-describedby={describedBy}
             >
@@ -124,7 +132,7 @@ export function ContactForm() {
                   {t(`topics.${topic}`)}
                 </option>
               ))}
-            </select>
+            </Select>
           )}
         </FormField>
       </div>

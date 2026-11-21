@@ -81,8 +81,10 @@ export async function Footer() {
         </div>
       </Container>
 
+      {/* Decorative wordmark, low contrast on purpose (WCAG exempts decoration and logotypes). */}
       <p
         aria-hidden
+        data-decorative
         // Mon Cheri capitals are a full 1em tall and rise ~0.19em above a 1.0 line box: pad the top,
         // trim the empty descender space below.
         className="mt-12 -mb-[0.16em] pt-[0.2em] text-center font-display text-[25.5vw] leading-none tracking-[-0.01em] text-[color-mix(in_oklab,var(--color-cream)_16%,var(--color-green))] select-none sm:mt-16"

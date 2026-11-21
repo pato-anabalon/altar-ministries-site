@@ -4,12 +4,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { BootScript } from "@/components/atoms/BootScript";
 import { AltarPreloader } from "@/components/organisms/AltarPreloader";
 import { Footer } from "@/components/organisms/Footer";
 import { Header } from "@/components/organisms/Header";
 import { SmoothScroll } from "@/components/organisms/SmoothScroll";
 import { routing } from "@/i18n/routing";
-import { BOOT_SCRIPT } from "@/lib/motion/preloader";
+import { churchJsonLd, jsonLdScript } from "@/lib/jsonld";
 import { site } from "@/lib/site";
 import { fontVariables } from "../fonts";
 import "../globals.css";
@@ -41,12 +42,14 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "header" });
+  const tMeta = await getTranslations({ locale, namespace: "metadata" });
 
   return (
     // The boot script sets html.motion and data-preloader before paint, hence suppressHydrationWarning.
     <html lang={locale} className={fontVariables} suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: BOOT_SCRIPT }} />
+        <BootScript />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(churchJsonLd(locale, tMeta("description"))) }} />
       </head>
       <body>
         <NextIntlClientProvider>

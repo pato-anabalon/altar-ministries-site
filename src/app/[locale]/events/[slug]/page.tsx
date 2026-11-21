@@ -50,25 +50,27 @@ export default async function EventPage({ params }: PageProps<"/[locale]/events/
       <Section surface="white" spacing="compact">
         <Container>
           <Reveal className="grid gap-12 lg:grid-cols-12 lg:gap-10">
-            <dl className="grid content-start gap-6 lg:col-span-4">
-              <div className="grid gap-1 border-t border-rule pt-5">
-                <dt className="type-small text-muted">{t("when")}</dt>
-                <dd className="type-lead">
-                  <time dateTime={event.start}>{formatEventWhen(format, event)}</time>
-                </dd>
-              </div>
-              {event.location && (
+            <div className="grid content-start gap-6 lg:col-span-4">
+              <dl className="grid gap-6">
                 <div className="grid gap-1 border-t border-rule pt-5">
-                  <dt className="type-small text-muted">{t("where")}</dt>
-                  <dd className="type-lead">{event.location}</dd>
+                  <dt className="type-small text-muted">{t("when")}</dt>
+                  <dd className="type-lead">
+                    <time dateTime={event.start}>{formatEventWhen(format, event)}</time>
+                  </dd>
                 </div>
-              )}
+                {event.location && (
+                  <div className="grid gap-1 border-t border-rule pt-5">
+                    <dt className="type-small text-muted">{t("where")}</dt>
+                    <dd className="type-lead">{event.location}</dd>
+                  </div>
+                )}
+              </dl>
               <div className="pt-2">
                 <Button href={{ pathname: "/contact", query: { about: event.title, topic: "other" } }} arrow>
                   {t("askCta")}
                 </Button>
               </div>
-            </dl>
+            </div>
             {Body && (
               <div className="lg:col-span-7 lg:col-start-6">
                 <Body />

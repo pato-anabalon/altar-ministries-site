@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Button } from "@/components/atoms/Button";
 import { Container } from "@/components/atoms/Container";
 import { Section } from "@/components/atoms/Section";
 import { TextLink } from "@/components/atoms/TextLink";
 import { Reveal } from "@/components/molecules/Reveal";
+import { ContactForm } from "@/components/organisms/ContactForm";
 import { ExperiencesList } from "@/components/organisms/ExperiencesList";
 import { PageHeader } from "@/components/organisms/PageHeader";
 import type { Locale } from "@/i18n/routing";
@@ -17,7 +19,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/visit">)
   return pageMetadata({ locale, href: "/visit", title: page.title, description: page.intro });
 }
 
-/** Visit us: Sunday at a glance, every Experience, joining online, and who to call. */
+/** Visit us: Sunday at a glance, every Experience, joining online, and a way to ask before coming. */
 export default async function VisitPage({ params }: PageProps<"/[locale]/visit">) {
   const locale = (await params).locale as Locale;
   setRequestLocale(locale);
@@ -66,18 +68,27 @@ export default async function VisitPage({ params }: PageProps<"/[locale]/visit">
 
       <Section spacing="compact" aria-labelledby="visit-online">
         <Container>
-          <div className="grid gap-12 md:grid-cols-2 md:gap-16">
-            <Reveal className="grid content-start justify-items-start gap-4">
-              <h2 id="visit-online" className="type-h2">
-                {t("online")}
-              </h2>
+          <Reveal className="grid gap-4 md:grid-cols-2 md:gap-16">
+            <h2 id="visit-online" className="type-h2">
+              {t("online")}
+            </h2>
+            <div className="grid content-start justify-items-start gap-4">
               <p className="type-body measure text-muted">{t("onlineText")}</p>
               <TextLink externalHref={site.streamUrl} className="type-ui">
                 {tHeader("watchOnline")}
               </TextLink>
-            </Reveal>
-            <Reveal delay={0.1} className="grid content-start justify-items-start gap-4">
-              <h2 className="type-h2">{t("questions")}</h2>
+            </div>
+          </Reveal>
+        </Container>
+      </Section>
+
+      <Section surface="white" aria-labelledby="visit-questions">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+            <Reveal className="grid content-start justify-items-start gap-4 lg:col-span-4">
+              <h2 id="visit-questions" className="type-h2">
+                {t("questions")}
+              </h2>
               <p className="type-body measure text-muted">{t("questionsText")}</p>
               <p className="flex flex-wrap gap-x-6 gap-y-2 type-ui">
                 {site.phones.map((phone) => (
@@ -87,6 +98,12 @@ export default async function VisitPage({ params }: PageProps<"/[locale]/visit">
                 ))}
                 <TextLink externalHref={`mailto:${site.email}`}>{site.email}</TextLink>
               </p>
+            </Reveal>
+            <Reveal delay={0.1} className="relative lg:col-span-7 lg:col-start-6">
+              {/* The form reads ?about= / ?topic=, which needs a Suspense boundary on a static page. */}
+              <Suspense>
+                <ContactForm defaultTopic="visit" />
+              </Suspense>
             </Reveal>
           </div>
         </Container>

@@ -3,9 +3,10 @@
 import { useId, useRef, useState, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/atoms/Button";
-import { controlClasses, FormField } from "@/components/molecules/FormField";
-import { fieldErrors, HONEYPOT, newsletterSchema, type FieldErrors, type FormResult, type NewsletterInput } from "@/lib/forms";
+import { controlClasses, FormField, Select } from "@/components/molecules/FormField";
+import { fieldErrors, HONEYPOT, newsletterSchema, type FormResult, type NewsletterInput } from "@/lib/forms";
 import { site } from "@/lib/site";
+import { useFormErrors } from "@/lib/useFormErrors";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -18,18 +19,26 @@ export function NewsletterForm() {
   const locale = useLocale();
   const id = useId();
   const form = useRef<HTMLFormElement>(null);
-  const [errors, setErrors] = useState<FieldErrors<NewsletterInput>>({});
+  // Raw values; the schema decides what is valid.
+  const read = (target: HTMLFormElement) => {
+    const data = new FormData(target);
+    return {
+      email: String(data.get("email") ?? ""),
+      language: String(data.get("language") ?? ""),
+      consent: data.get("consent") === "on",
+    };
+  };
+  const { errors, setErrors, onChange } = useFormErrors<NewsletterInput>((target) => {
+    const parsed = newsletterSchema.safeParse(read(target));
+    return parsed.success ? {} : fieldErrors(parsed.error);
+  });
   const [status, setStatus] = useState<Status>("idle");
   const [failure, setFailure] = useState("");
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const parsed = newsletterSchema.safeParse({
-      email: String(data.get("email") ?? ""),
-      language: String(data.get("language") ?? ""),
-      consent: data.get("consent") === "on",
-    });
+    const parsed = newsletterSchema.safeParse(read(event.currentTarget));
     if (!parsed.success) {
       setErrors(fieldErrors(parsed.error));
       requestAnimationFrame(() => form.current?.querySelector<HTMLElement>("[aria-invalid=true]")?.focus());
@@ -62,7 +71,7 @@ export function NewsletterForm() {
   }
 
   return (
-    <form ref={form} noValidate onSubmit={submit} className="grid gap-6">
+    <form ref={form} noValidate onSubmit={submit} onChange={onChange} className="grid gap-6">
       <div className="grid gap-6 sm:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]">
         <FormField id={`${id}-email`} label={t("email")} error={errors.email ? t(`errors.${errors.email}`) : undefined}>
           {(describedBy) => (
@@ -80,10 +89,10 @@ export function NewsletterForm() {
         </FormField>
         <FormField id={`${id}-language`} label={t("language")}>
           {() => (
-            <select id={`${id}-language`} name="language" defaultValue={locale} className={controlClasses}>
+            <Select id={`${id}-language`} name="language" defaultValue={locale}>
               <option value="en">English</option>
               <option value="es">Español</option>
-            </select>
+            </Select>
           )}
         </FormField>
       </div>
