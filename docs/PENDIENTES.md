@@ -18,7 +18,7 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 - [x] Archivos pesados (audio, PDFs, fotos) en Vercel Blob; el contenido solo referencia URLs
 - [x] Toda lectura de contenido pasa por `lib/content` para poder migrar a DB + admin propio en el futuro
 - [ ] Panel admin solo en local (genera MDX + sube a Blob) — evaluar si publicar a mano se vuelve tedioso
-- [ ] Events: definir rebuild diario (Vercel Cron + deploy hook) o ISR para mover eventos a "pasados"
+- [x] Events: ISR diario (`revalidate = 86400` en Home y Events) mueve los eventos a "pasados" sin redeploy
 
 ## Fase 2 (después del lanzamiento)
 
