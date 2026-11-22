@@ -8,6 +8,7 @@ import { BootScript } from "@/components/atoms/BootScript";
 import { AltarPreloader } from "@/components/organisms/AltarPreloader";
 import { Footer } from "@/components/organisms/Footer";
 import { Header } from "@/components/organisms/Header";
+import { HomeHeroWarmup } from "@/components/organisms/HomeHero";
 import { SmoothScroll } from "@/components/organisms/SmoothScroll";
 import { routing } from "@/i18n/routing";
 import { churchJsonLd, jsonLdScript } from "@/lib/jsonld";
@@ -79,6 +80,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           <SmoothScroll />
           <AltarPreloader />
           <Header />
+          <HomeHeroWarmup />
           <main id="main" tabIndex={-1} className="outline-none">
             {children}
           </main>

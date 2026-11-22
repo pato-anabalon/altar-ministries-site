@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useId, useLayoutEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/atoms/Button";
@@ -30,7 +30,9 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const header = useRef<HTMLElement>(null);
 
-  useEffect(() => {
+  // Layout effect: on a route change the new state (transparent over the Home hero) is set before
+  // the first paint, instead of showing the previous page's solid header for a frame.
+  useLayoutEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;

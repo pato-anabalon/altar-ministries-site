@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { getImageProps } from "next/image";
 import { Button } from "@/components/atoms/Button";
 import { Container } from "@/components/atoms/Container";
 import { HeroLetters } from "@/components/atoms/HeroLetters";
+import { usePathname } from "@/i18n/navigation";
 import { DEFAULT_WINDOW_PATH, heroShape, mixParams } from "@/lib/motion/windowShape";
 import { alignCrossToGlyph, crossOnScreen, finalCrossTransform, mixTransforms, withCover } from "@/lib/motion/crossAlign";
 import { measureGlyphBar } from "@/lib/motion/glyph";
@@ -22,6 +23,41 @@ function artDirected(desktop: string, mobile: string, mobileSize: { width: numbe
 
 const cross = artDirected("/images/hero/cross-desktop.jpg", "/images/hero/cross-mobile.jpg", { width: 864, height: 1536 });
 const auckland = artDirected("/images/hero/auckland-desktop.jpg", "/images/hero/auckland-mobile.jpg", { width: 1536, height: 2752 });
+
+// Kept alive so the browser holds them decoded until the hero mounts.
+const warmed: HTMLImageElement[] = [];
+
+/**
+ * Loads and decodes the hero photos in the background on the other pages, once the page is idle,
+ * so going back to Home does not show the hero empty (black, ALTAR only) while they download.
+ */
+export function HomeHeroWarmup() {
+  const pathname = usePathname();
+  const home = pathname === "/";
+
+  useEffect(() => {
+    if (home || warmed.length) return;
+    const landscape = window.matchMedia("(min-aspect-ratio: 1/1)").matches;
+    const warm = () => {
+      for (const image of [auckland, cross]) {
+        const img = new Image();
+        img.sizes = "100vw";
+        img.srcset = landscape ? image.desktopSrcSet! : image.img.srcSet!;
+        img.decode().catch(() => {});
+        warmed.push(img);
+      }
+    };
+    // Safari has no requestIdleCallback.
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(warm, { timeout: 4000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = window.setTimeout(warm, 2000);
+    return () => window.clearTimeout(id);
+  }, [home]);
+
+  return null;
+}
 
 function HeroPicture({ image, className, ...data }: { image: typeof cross; className?: string } & Record<`data-${string}`, boolean>) {
   return (
