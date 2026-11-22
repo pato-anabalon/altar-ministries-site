@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { Locale } from "@/i18n/routing";
+import { isTestSite } from "@/lib/stage";
 
 /**
  * Bilingual content is written once, side by side, so the two languages can never drift apart:
@@ -38,12 +39,11 @@ export function resolve<T>(value: T, locale: Locale): Resolved<T> {
 
 /**
  * Publishing state for facts the client still has to confirm. `pending` items render in
- * development and on the test site (Vercel preview, `develop` branch) so they can be reviewed in
- * context, and are left out of production: the `main` deployment and local production builds.
+ * development and on the test site (`lib/stage.ts`) so they can be reviewed in context, and are
+ * left out of production: the `main` deployment and local production builds.
  */
 export const status = z.enum(["confirmed", "pending"]).default("confirmed");
 
 export function isPublished(item: { status?: "confirmed" | "pending" }) {
-  const preview = Boolean(process.env.VERCEL_ENV) && process.env.VERCEL_ENV !== "production";
-  return item.status !== "pending" || process.env.NODE_ENV !== "production" || preview;
+  return item.status !== "pending" || process.env.NODE_ENV !== "production" || isTestSite();
 }

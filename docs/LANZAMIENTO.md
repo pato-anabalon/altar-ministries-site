@@ -2,23 +2,29 @@
 
 Pasos que hace Pato (cuentas, dominio, deploy). El código ya está listo para producción: `npm run verify` y `npm run test:e2e` pasan.
 
+## Estado (2026-11-22)
+
+- Sitio de test en Vercel: https://altar-ministries-site.vercel.app/ (es el deploy de **Production** del proyecto). Para que se comporte como test necesita `SITE_ENV=test` en Production (ver §2).
+- Se presenta así al cliente. **Después de la presentación**: privacidad, revisión de textos, variables de Resend, Resend y dominios.
+- Hasta entonces los formularios (contacto y boletín) responden 503 en Vercel: avisar en la presentación que aún no envían.
+
 ## Ramas y ambientes
 
 | Rama | Ambiente | Vercel | URL |
 |---|---|---|---|
 | `main` | Producción | Production | `altar.org.nz` |
-| `develop` | Test (revisión del cliente) | Preview | `test.altar.org.nz` (o la URL fija de rama `…-git-develop-….vercel.app`) |
+| `develop` | Test (revisión del cliente) | Preview | `test.altar.org.nz` (o la URL fija de rama `…-git-develop-….vercel.app`). Hoy, provisional: `altar-ministries-site.vercel.app` con `SITE_ENV=test` |
 
 Flujo: el trabajo entra a `develop`, se revisa en test y se lleva a `main` con un PR `develop → main`. Cada push a `main` publica producción.
 
-Diferencias de test respecto a producción (automáticas, según `VERCEL_ENV`):
+Diferencias de test respecto a producción (automáticas en previews según `VERCEL_ENV`, o con `SITE_ENV=test`; `src/lib/stage.ts`):
 - `robots.txt` bloquea todo: test no aparece en buscadores.
 - El contenido `pending` (datos por confirmar) se ve en test para que el cliente lo revise en contexto; en producción se oculta.
 
 ## 0. Antes de lanzar (bloqueantes)
 
 - [ ] Política de privacidad publicada (los formularios de contacto y boletín la enlazan desde `/resources/policies`)
-- [ ] Correo de destino confirmado (`CONTACT_TO_EMAIL`; hoy contact@altar.org.nz temporal)
+- [x] Correo de destino confirmado: `CONTACT_TO_EMAIL` = contact@altar.org.nz
 - [ ] Revisión del cliente de los textos EN (y de los redactados por Nodo, ver `PENDIENTES.md`)
 - [ ] Sin contenido `pending` que deba verse: en producción se oculta solo, revisar que no falte nada importante
 
@@ -39,8 +45,9 @@ En Vercel cada variable se asigna a un ambiente; las de test van en **Preview** 
 |---|---|---|
 | `RESEND_API_KEY` | Clave de Resend | La misma clave (o una de prueba) |
 | `CONTACT_FROM_EMAIL` | `Altar Ministries <website@altar.org.nz>` | El mismo remitente |
-| `CONTACT_TO_EMAIL` | Correo de la iglesia | Correo del equipo Nodo, para que las pruebas no lleguen a la iglesia |
+| `CONTACT_TO_EMAIL` | contact@altar.org.nz | Correo del equipo Nodo, para que las pruebas no lleguen a la iglesia |
 | `RESEND_NEWSLETTER_SEGMENT_EN` / `_ES` | IDs de los segmentos | Vacías: en test las suscripciones llegan como aviso a `CONTACT_TO_EMAIL` y no ensucian la lista real |
+| `SITE_ENV` | `test` **solo mientras** el test viva en el deploy de Production (`altar-ministries-site.vercel.app`); borrarla al pasar producción a `main` con altar.org.nz | No hace falta (los previews ya son test) |
 
 Sin `RESEND_API_KEY` los formularios responden 503 en cualquier deploy de Vercel (también en test). Los previews de otras ramas no reciben estas variables si quedan limitadas a `develop`.
 
@@ -72,7 +79,7 @@ Primero en test (`develop`), luego en producción (`main`):
 
 ## Ya resuelto en código
 
-- Test y previews fuera de buscadores: `robots.txt` bloquea todo si `VERCEL_ENV` no es `production`.
+- Test y previews fuera de buscadores: `robots.txt` bloquea todo si `VERCEL_ENV` no es `production` o si `SITE_ENV=test`.
 - Contenido `pending` visible en test y oculto en producción (`isPublished` en `src/lib/content/localized.ts`).
 - Cabeceras de seguridad (`next.config.ts`): `nosniff`, sin iframes ajenos, `Referrer-Policy`, `Permissions-Policy`. HSTS lo pone Vercel.
 - Eventos: Home y Events se regeneran cada 24 h (`revalidate = 86400`), así los eventos pasados salen solos.
