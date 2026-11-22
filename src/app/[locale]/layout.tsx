@@ -21,8 +21,24 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+/** Only the two locales exist: anything else in the first segment (e.g. /favicon.ico, which the proxy skips) is a 404, not a render. */
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
+}
+
+/**
+ * Where this deployment is served, so share images resolve on it: the production domain on Vercel
+ * production (the vercel.app one until altar.org.nz is attached), the branch URL on the test site.
+ * Canonical and hreflang links stay on site.url.
+ */
+function deploymentUrl() {
+  const host =
+    process.env.VERCEL_ENV === "production"
+      ? process.env.VERCEL_PROJECT_PRODUCTION_URL
+      : (process.env.VERCEL_BRANCH_URL ?? process.env.VERCEL_URL);
+  return host ? `https://${host}` : site.url;
 }
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
@@ -30,7 +46,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Pr
   const t = await getTranslations({ locale, namespace: "metadata" });
 
   return {
-    metadataBase: new URL(site.url),
+    metadataBase: new URL(deploymentUrl()),
     title: { default: t("title"), template: `%s | ${site.name}` },
     description: t("description"),
   };
