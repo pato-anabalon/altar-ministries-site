@@ -39,6 +39,22 @@ export function SmoothScroll() {
     if (keep) return;
     scrollToTop();
     ScrollTrigger.refresh();
+
+    // A late refresh (fonts, images) or leftover smooth-scroll momentum can still move the new page:
+    // hold the top for a moment, until the visitor scrolls themselves.
+    const hold = () => {
+      if (window.scrollY !== 0) scrollToTop();
+    };
+    const inputs = ["wheel", "touchstart", "keydown", "pointerdown"] as const;
+    const release = () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", hold);
+      inputs.forEach((type) => window.removeEventListener(type, release));
+    };
+    const timer = window.setTimeout(release, 2500);
+    window.addEventListener("scroll", hold, { passive: true });
+    inputs.forEach((type) => window.addEventListener(type, release, { passive: true }));
+    return release;
   }, [pathname]);
 
   useEffect(() => {
