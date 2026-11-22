@@ -88,6 +88,8 @@ describe("pending content", () => {
     expect(isPublished({ status: "pending" })).toBe(true);
     vi.stubEnv("VERCEL_ENV", "production");
     expect(isPublished({ status: "pending" })).toBe(false);
+    vi.stubEnv("SITE_ENV", "test");
+    expect(isPublished({ status: "pending" })).toBe(true);
   });
 
   it("leaves unconfirmed milestones out of production", () => {

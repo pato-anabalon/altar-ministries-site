@@ -2,7 +2,7 @@
 export const site = {
   name: "Altar Ministries",
   url: "https://altar.org.nz",
-  /** Temporary until the client confirms the public address. */
+  /** Confirmed by the client (2026-11-22). */
   email: "contact@altar.org.nz",
   instagram: "https://www.instagram.com/altar.ministries/",
   /** Temporary: points to Instagram until the client confirms the streaming platform and URL. */

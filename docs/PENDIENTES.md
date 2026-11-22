@@ -34,10 +34,10 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 
 - [ ] Idiomas de cada reunión
 - [ ] Enlace de Zoom (Prayer Experience)
-- [ ] Email público de contacto
+- [x] Email público de contacto: contact@altar.org.nz (confirmado 2026-11-22)
 - [ ] Revisar perfil institucional 2026 y su traducción al inglés
 - [ ] Aprobar identidad visual (logo, paleta, tipografías)
-- [ ] Dominio
+- [ ] Dominio (después de la presentación al cliente)
 - [ ] Fotos, biografías, políticas, enlaces y archivos en ambos idiomas
 - [ ] Método de donación
 - [ ] Formato del newsletter global
@@ -48,7 +48,7 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 
 - [ ] Cuentas de editores / CMS y control de acceso
 - [ ] Almacenamiento compartido (audios, PDFs, imágenes)
-- [ ] Envío de formularios: Resend ya integrado; falta la cuenta, verificar el dominio altar.org.nz (remitente `CONTACT_FROM_EMAIL`), confirmar el correo de destino (`CONTACT_TO_EMAIL`, hoy contact@altar.org.nz temporal) y cargar las variables en Vercel
+- [ ] Envío de formularios: Resend ya integrado; falta la cuenta, verificar el dominio altar.org.nz (remitente `CONTACT_FROM_EMAIL`), cargar las variables en Vercel (destino `CONTACT_TO_EMAIL` = contact@altar.org.nz, confirmado). Se hace después de la presentación al cliente
 - [ ] Newsletter: crear los segmentos EN/ES en Resend (`RESEND_NEWSLETTER_SEGMENT_EN/_ES`), aprobar el texto de consentimiento y preparar la primera edición
 - [ ] Calendario en vivo de eventos
 - [ ] Redes sociales (Instagram y otras)
@@ -80,7 +80,7 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 - [ ] Fotos originales sin marca de agua, alta resolución, algunas horizontales (hoy: 13 fotos de Instagram 1080×1350 con logo incrustado)
 - [ ] Fotos y biografías de líderes (hoy: placeholder)
 - [ ] Logo en SVG con la "A" con onda (hoy: PNG 6–9 en header/footer; "ALTAR" grande con TAN Mon Cheri)
-- [ ] Email de contacto definitivo (hoy: contact@altar.org.nz)
+- [x] Email de contacto definitivo: contact@altar.org.nz
 - [x] Imágenes del hero (IA): `cross.png` (16:9; la 9:16 se recorta centrada), `auckland-desktop.png` (16:9, Sky Tower a la izquierda + Harbour Bridge a la derecha), `auckland-mobile.png` (9:16)
 - [ ] Opcional: escalar ×1.5 el recorte 9:16 de la cruz (hoy 864×1536)
 - [ ] Opcional: reemplazar Auckland por foto real equivalente (North Shore → CBD + Harbour Bridge, hora azul)

@@ -1,9 +1,10 @@
 import type { MetadataRoute } from "next";
 import { site } from "@/lib/site";
+import { isTestSite } from "@/lib/stage";
 
-/** Only the production deployment is crawlable; Vercel previews stay out of search results. */
+/** Only the production site is crawlable; the test site stays out of search results. */
 export default function robots(): MetadataRoute.Robots {
-  if (process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production") {
+  if (isTestSite()) {
     return { rules: { userAgent: "*", disallow: "/" } };
   }
   return {
