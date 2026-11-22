@@ -17,6 +17,20 @@ export function lockScroll(): () => void {
 }
 
 export function scrollToTop() {
-  if (instance) instance.scrollTo(0, { immediate: true });
+  if (instance) instance.scrollTo(0, { immediate: true, force: true });
   else window.scrollTo(0, 0);
+}
+
+let keepScroll = false;
+
+/** Marks the next URL change as in-page (a modal with its own URL): the page keeps its scroll. */
+export function keepScrollOnNextRoute() {
+  keepScroll = true;
+}
+
+/** Reads and clears the mark left by keepScrollOnNextRoute. */
+export function takeKeepScroll() {
+  const keep = keepScroll;
+  keepScroll = false;
+  return keep;
 }

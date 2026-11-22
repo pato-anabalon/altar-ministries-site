@@ -8,6 +8,7 @@ import { Section } from "@/components/atoms/Section";
 import { Modal } from "@/components/molecules/Modal";
 import { Reveal } from "@/components/molecules/Reveal";
 import { MinistryDetail, type Ministry, type MinistryLabels } from "@/components/organisms/MinistryDetail";
+import { keepScrollOnNextRoute } from "@/lib/motion/lenis";
 
 type Entry = { ministry: Ministry; href: string; labels: MinistryLabels };
 type Group = { id: string; title: string; entries: Entry[] };
@@ -32,6 +33,7 @@ export function MinistryDirectory({ groups, closeLabel }: { groups: Group[]; clo
     // Let the browser handle new-tab / new-window / download clicks.
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
+    keepScrollOnNextRoute();
     window.history.pushState(null, "", href);
   };
 
