@@ -60,9 +60,8 @@ test.describe("with motion", () => {
 
   test("switching language from the hero loads the other document with its motion state", async ({ page }) => {
     const errors: string[] = [];
-    // Vercel Analytics only exists once deployed; its scripts 404 locally.
     page.on("console", (message) => {
-      if (message.type() === "error" && !message.location().url.includes("/_vercel/")) errors.push(message.text());
+      if (message.type() === "error") errors.push(message.text());
     });
     await page.goto("/en");
     await expect(page.locator("html")).toHaveAttribute("data-preloader", "done", { timeout: 10_000 });

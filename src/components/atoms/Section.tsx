@@ -22,6 +22,7 @@ export function Section({
   id,
   className,
   "aria-labelledby": labelledBy,
+  "aria-label": label,
 }: {
   children: ReactNode;
   surface?: SurfaceName;
@@ -30,9 +31,11 @@ export function Section({
   id?: string;
   className?: string;
   "aria-labelledby"?: string;
+  /** For a band without a visible heading of its own. */
+  "aria-label"?: string;
 }) {
   return (
-    <Tag id={id} data-surface={surface} aria-labelledby={labelledBy} className={cn(spacingClasses[spacing], className)}>
+    <Tag id={id} data-surface={surface} aria-labelledby={labelledBy} aria-label={label} className={cn(spacingClasses[spacing], className)}>
       {children}
     </Tag>
   );

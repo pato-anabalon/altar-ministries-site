@@ -86,8 +86,13 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
           </main>
           <Footer />
         </NextIntlClientProvider>
-        <Analytics />
-        <SpeedInsights />
+        {/* Their scripts are served by Vercel only; a local production build would request missing files. */}
+        {process.env.VERCEL && (
+          <>
+            <Analytics />
+            <SpeedInsights />
+          </>
+        )}
       </body>
     </html>
   );
