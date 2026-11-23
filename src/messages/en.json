@@ -37,7 +37,12 @@
     "resources": "Resources",
     "contact": "Contact",
     "newsletters": "Newsletter",
-    "policies": "Policies"
+    "policies": "Policies",
+    "give": "Give",
+    "opportunities": "Opportunities",
+    "bookshop": "Bookshop",
+    "churches": "Our churches",
+    "supporters": "Supporters"
   },
   "header": {
     "planVisit": "Plan your visit",
@@ -102,7 +107,8 @@
   "global": {
     "partners": "Partners in Faith",
     "stayConnected": "Stay connected",
-    "stayConnectedText": "News from Altar reaches people in many countries. Subscribe to the newsletter or get in touch."
+    "stayConnectedText": "News from Altar reaches people in many countries. Subscribe to the newsletter or get in touch.",
+    "moreTitle": "More from Global"
   },
   "ministries": {
     "people": "Every stage of life",
@@ -170,5 +176,24 @@
     "call": "Call us",
     "write": "Email",
     "follow": "Follow us"
+  },
+  "give": {
+    "waysTitle": "Ways to give",
+    "waysPending": "Ways to give: donation method awaiting approval",
+    "towardsTitle": "Give towards",
+    "seeCommunity": "See community support"
+  },
+  "opportunities": {
+    "pending": "Openings: approved roles and how to apply"
+  },
+  "bookshop": {
+    "pending": "Bookshop: model, catalogue and payments"
+  },
+  "churches": {
+    "pending": "Church directory: profile and link for each church",
+    "visit": "Visit website"
+  },
+  "supporters": {
+    "pending": "Supporters: names, logos and permission to show them"
   }
 }

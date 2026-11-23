@@ -74,12 +74,34 @@ export const globalSchema = z
     community: titledText,
     altarGlobal: titledText,
     missions: titledText,
+    /** Our Churches (phase 2): formally established churches, once their details are approved. */
+    churches: z.array(
+      z.object({ id, name: text, location: localizedText, summary: localizedText.optional(), url: z.url().optional(), status }).strict(),
+    ),
+    /** Supporters (phase 2): names and logos the client has permission to show. */
+    supporters: z.array(
+      z
+        .object({
+          id,
+          name: text,
+          /** Path under /public; null shows the name alone. */
+          logo: text.nullable(),
+          url: z.url().optional(),
+          status,
+        })
+        .strict(),
+    ),
     partners: z.array(
       z
         .object({ id, name: text, description: localizedText.optional(), url: z.url().optional(), status })
         .strict(),
     ),
   })
+  .strict();
+
+/** An approved opening (phase 2): what it is and how to apply. */
+export const opportunitySchema = z
+  .object({ id, title: localizedText, summary: localizedText, applyUrl: z.url().optional(), status })
   .strict();
 
 export const eventSchema = z
@@ -111,7 +133,7 @@ export const photoSchema = z
   .object({ id, src: z.string().regex(/^\/images\/[\w/.-]+\.(avif|webp|jpe?g|png)$/), alt: localizedText })
   .strict();
 
-const pageCopy = z.object({ title: localizedText, intro: localizedText.optional() }).catchall(localizedText);
+const pageCopy = z.object({ title: localizedText, intro: localizedText.optional(), status }).catchall(localizedText);
 
 export const pagesSchema = z
   .object({
@@ -129,5 +151,10 @@ export const pagesSchema = z
     newsletters: pageCopy,
     policies: pageCopy,
     contact: pageCopy,
+    give: pageCopy,
+    opportunities: pageCopy,
+    bookshop: pageCopy,
+    churches: pageCopy,
+    supporters: pageCopy,
   })
   .strict();

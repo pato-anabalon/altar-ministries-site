@@ -148,7 +148,7 @@ Modal con URL propia → `history.pushState` (integrado con el router de Next): 
 **Navegación**
 - Header: Visit Us · About · Ministries · Community · Global · Events · Resources · [Contact] · EN/ES. CTA "Plan your visit".
 - Footer: logo, dirección y horarios, Contact, Newsletter (signup), Policies, Instagram, copyright.
-- Las páginas de fase 2 no se enlazan hasta activarse (rutas sin generar, no 404 enlazados).
+- Las páginas de fase 2 no se enlazan hasta activarse: quedan `pending` en `pages.ts` (visibles en dev y test, 404 en producción) y se enlazan solas al quitar el `status` (`phase2Nav` en `lib/nav.ts`).
 
 ---
 
@@ -262,6 +262,7 @@ Principio: **peaceful**. Movimiento lento y suave que acompaña; nada que rebote
 | 8 | Contact + forms ✅ | `/api/contact` (Resend, `replyTo` del visitante, tema + contexto + idioma) y `/api/newsletter` (contacto en el segmento de Resend del idioma elegido, o aviso por correo si no hay segmentos). Schemas zod compartidos con el navegador (`lib/forms.ts`), errores en línea accesibles, honeypot y límite por IP. Sin claves: simulado en desarrollo, 503 en producción. Botones "Consulta por este equipo/evento" pasan `?about=&topic=` al formulario. Variables en `.env.example` |
 | 9 | Pulido ✅ | SEO: `sitemap.xml` bilingüe con hreflang (incluye ministerios y eventos), `robots.txt`, JSON-LD `Church` con dirección y Experiencia del domingo (`lib/jsonld.ts`), imagen para compartir por idioma (`[locale]/opengraph-image.tsx`, cruz + ALTAR en Mon Cheri) y tarjeta grande en X. Playwright + axe (`npm run test:e2e`): WCAG 2.2 AA en todas las páginas del sitemap, sin desborde en 375–1440 px, formularios, modal, idioma, skip link, 404. Arreglos: `<dl>` inválido en eventos, avisos de GSAP con placeholders, alineación de campos con error, chevron del select. Lighthouse local: páginas internas ~91–92 en rendimiento; en la Home el LCP llega con el preloader (~3.4 s, solo la primera visita de la sesión). Textos EN/ES revisados |
 | 10 | Lanzamiento (código listo) | Preparado: cabeceras de seguridad (`next.config.ts`), previews de Vercel fuera de buscadores (`robots.ts` según `VERCEL_ENV`), Vercel Analytics + Speed Insights en el layout, guía paso a paso en [LANZAMIENTO.md](./LANZAMIENTO.md). Falta (Pato): conectar Vercel, dominio altar.org.nz, variables de entorno, Resend, Search Console |
+| 11 | Fase 2: estructura | Give, Opportunities, Bookshop, Our churches y Supporters con rutas traducidas, schemas (`opportunities`, `global.churches`, `global.supporters`) y `<Placeholder>` donde falta material. Páginas `pending` (`isPageLive`): se ven en dev y en test, en producción dan 404 y no están en el sitemap ni enlazadas. Al activarse se enlazan solas: Give, Opportunities y Bookshop en el footer; Our churches y Supporters desde Global. Give ya muestra Kids Presents (referencia KIDS-EOY). Bookshop sin schema hasta definir el modelo |
 
 ---
 

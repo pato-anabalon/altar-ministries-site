@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { locales } from "@/i18n/routing";
-import { getEvents, getHistory, getMinistry, getMinistries, getPage, getStaticSlugs } from "./index";
+import { phase2Nav } from "@/lib/nav";
+import { getEvents, getHistory, getMinistry, getMinistries, getPage, getStaticSlugs, isPageLive } from "./index";
 import { isPublished, resolve } from "./localized";
 import { ministrySchema } from "./schemas";
 import { translateSlug } from "./slugs";
@@ -95,5 +96,13 @@ describe("pending content", () => {
   it("leaves unconfirmed milestones out of production", () => {
     vi.stubEnv("NODE_ENV", "production");
     expect(getHistory("en").map((milestone) => milestone.id)).not.toContain("nexus-initiative");
+  });
+
+  it("keeps phase 2 pages out of production until their material arrives", () => {
+    vi.stubEnv("NODE_ENV", "production");
+    expect(phase2Nav.filter((item) => isPageLive(item.key))).toEqual([]);
+    vi.stubEnv("SITE_ENV", "test");
+    expect(phase2Nav.every((item) => isPageLive(item.key))).toBe(true);
+    expect(isPageLive("about")).toBe(true);
   });
 });

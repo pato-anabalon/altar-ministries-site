@@ -37,7 +37,12 @@
     "resources": "Recursos",
     "contact": "Contacto",
     "newsletters": "Boletín",
-    "policies": "Políticas"
+    "policies": "Políticas",
+    "give": "Donar",
+    "opportunities": "Oportunidades",
+    "bookshop": "Librería",
+    "churches": "Nuestras iglesias",
+    "supporters": "Patrocinadores"
   },
   "header": {
     "planVisit": "Planifica tu visita",
@@ -102,7 +107,8 @@
   "global": {
     "partners": "Aliados en la fe",
     "stayConnected": "Sigamos conectados",
-    "stayConnectedText": "Las noticias de Altar llegan a personas en muchos países. Suscríbete al boletín o escríbenos."
+    "stayConnectedText": "Las noticias de Altar llegan a personas en muchos países. Suscríbete al boletín o escríbenos.",
+    "moreTitle": "Más de Global"
   },
   "ministries": {
     "people": "Para cada etapa de la vida",
@@ -170,5 +176,24 @@
     "call": "Llámanos",
     "write": "Correo",
     "follow": "Síguenos"
+  },
+  "give": {
+    "waysTitle": "Formas de donar",
+    "waysPending": "Formas de donar: método de donación por aprobar",
+    "towardsTitle": "Puedes donar para",
+    "seeCommunity": "Ver apoyo a la comunidad"
+  },
+  "opportunities": {
+    "pending": "Oportunidades: avisos aprobados y cómo postular"
+  },
+  "bookshop": {
+    "pending": "Librería: modelo, catálogo y pagos"
+  },
+  "churches": {
+    "pending": "Directorio de iglesias: perfil y enlace de cada iglesia",
+    "visit": "Visitar sitio web"
+  },
+  "supporters": {
+    "pending": "Patrocinadores: nombres, logos y permiso para mostrarlos"
   }
 }

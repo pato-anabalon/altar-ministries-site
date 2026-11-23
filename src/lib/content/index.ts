@@ -7,6 +7,7 @@ import { global } from "@/content/data/global";
 import { history } from "@/content/data/history";
 import { leaders } from "@/content/data/leaders";
 import { ministries } from "@/content/data/ministries";
+import { opportunities } from "@/content/data/opportunities";
 import { pages } from "@/content/data/pages";
 import { photos } from "@/content/data/photos";
 import { policies, resourceCategories } from "@/content/data/resources";
@@ -22,6 +23,7 @@ import {
   milestoneSchema,
   ministrySchema,
   namedItemSchema,
+  opportunitySchema,
   pagesSchema,
   photoSchema,
   policySchema,
@@ -49,6 +51,7 @@ const content = {
   community: parse("community", z.array(communitySchema), community),
   global: parse("global", globalSchema, global),
   events: parse("events", z.array(eventSchema), events),
+  opportunities: parse("opportunities", z.array(opportunitySchema), opportunities),
   pages: parse("pages", pagesSchema, pages),
   photos: parse("photos", z.array(photoSchema), photos),
   resourceCategories: parse("resources", z.array(resourceCategorySchema), resourceCategories),
@@ -59,6 +62,11 @@ export type PageKey = keyof typeof content.pages;
 
 export function getPage<K extends PageKey>(key: K, locale: Locale) {
   return resolve(content.pages[key], locale);
+}
+
+/** Whether a page is published: phase 2 pages are pending until their material arrives. */
+export function isPageLive(key: PageKey) {
+  return isPublished(content.pages[key]);
 }
 
 export type PhotoId = (typeof photos)[number]["id"];
@@ -116,7 +124,11 @@ export function getCommunity(locale: Locale) {
 }
 
 export function getGlobal(locale: Locale) {
-  return resolve({ ...content.global, partners: content.global.partners.filter(isPublished) }, locale);
+  const { churches, supporters, partners } = content.global;
+  return resolve(
+    { ...content.global, churches: churches.filter(isPublished), supporters: supporters.filter(isPublished), partners: partners.filter(isPublished) },
+    locale,
+  );
 }
 
 /** Splits published events at `now`: upcoming soonest first, past most recent first. */
@@ -132,6 +144,10 @@ export function getEvents(locale: Locale, now = new Date()) {
 export function getEvent(slug: string, locale: Locale) {
   const event = content.events.find((item) => isPublished(item) && item.slug[locale] === slug);
   return event ? resolve(event, locale) : null;
+}
+
+export function getOpportunities(locale: Locale) {
+  return resolve(content.opportunities.filter(isPublished), locale);
 }
 
 export function getResourceCategories(locale: Locale) {

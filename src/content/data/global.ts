@@ -24,6 +24,9 @@ export const global = {
       es: "Conoce cómo participar en misiones y apoyar la plantación de iglesias.",
     },
   },
+  // Phase 2: filled in as the client approves each church and supporter.
+  churches: [],
+  supporters: [],
   partners: [
     {
       id: "nexus",

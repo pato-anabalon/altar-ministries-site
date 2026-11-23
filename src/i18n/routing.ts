@@ -6,7 +6,8 @@ export type Locale = (typeof locales)[number];
 /**
  * Site map (docs/PLAN-IMPLEMENTACION.md §3). Keys are the internal (English) routes used in code;
  * values are the public URL per locale. Phase 2 pages (give, opportunities, bookshop, our churches,
- * supporters) are added here only when they go live.
+ * supporters) stay pending until the client supplies their material: rendered in development and on
+ * the test site, 404 and out of the sitemap in production (`isPageLive`, lib/nav.ts `phase2Nav`).
  */
 export const routing = defineRouting({
   locales,
@@ -23,12 +24,17 @@ export const routing = defineRouting({
     "/ministries/[slug]": { en: "/ministries/[slug]", es: "/ministerios/[slug]" },
     "/community": { en: "/community", es: "/comunidad" },
     "/global": "/global",
+    "/global/churches": { en: "/global/churches", es: "/global/iglesias" },
+    "/global/supporters": { en: "/global/supporters", es: "/global/patrocinadores" },
     "/events": { en: "/events", es: "/eventos" },
     "/events/[slug]": { en: "/events/[slug]", es: "/eventos/[slug]" },
     "/resources": { en: "/resources", es: "/recursos" },
     "/resources/newsletters": { en: "/resources/newsletters", es: "/recursos/boletines" },
     "/resources/policies": { en: "/resources/policies", es: "/recursos/politicas" },
     "/contact": { en: "/contact", es: "/contacto" },
+    "/give": { en: "/give", es: "/donar" },
+    "/opportunities": { en: "/opportunities", es: "/oportunidades" },
+    "/bookshop": { en: "/bookshop", es: "/libreria" },
   },
 });
 

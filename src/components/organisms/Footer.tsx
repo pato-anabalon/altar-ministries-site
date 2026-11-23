@@ -3,7 +3,8 @@ import { Container } from "@/components/atoms/Container";
 import { Logo } from "@/components/atoms/Logo";
 import { Section } from "@/components/atoms/Section";
 import { TextLink } from "@/components/atoms/TextLink";
-import { connectNav, mainNav } from "@/lib/nav";
+import { isPageLive } from "@/lib/content";
+import { connectNav, mainNav, phase2Nav } from "@/lib/nav";
 import { site } from "@/lib/site";
 
 /**
@@ -15,6 +16,8 @@ export async function Footer() {
   const tNav = await getTranslations("nav");
   const tHeader = await getTranslations("header");
   const year = new Date().getFullYear();
+  // Phase 2 pages once live; Our churches and Supporters are reached from Global.
+  const phase2 = phase2Nav.filter((item) => !item.href.startsWith("/global/") && isPageLive(item.key));
 
   return (
     <Section as="footer" surface="green" spacing="none" className="overflow-hidden pt-20 sm:pt-28">
@@ -60,7 +63,7 @@ export async function Footer() {
               <li>
                 <TextLink externalHref={site.streamUrl}>{tHeader("watchOnline")}</TextLink>
               </li>
-              {connectNav.map((item) => (
+              {[...connectNav, ...phase2].map((item) => (
                 <li key={item.key}>
                   <TextLink href={item.href}>{tNav(item.key)}</TextLink>
                 </li>

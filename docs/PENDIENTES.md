@@ -22,6 +22,8 @@ Fuente: prototipo del cliente (`/en/review/`) + decisiones de estructura del 202
 
 ## Fase 2 (después del lanzamiento)
 
+Estructura lista con placeholders (hito 11). Para activar una página: cargar su material y quitar `status: "pending"` de su entrada en `src/content/data/pages.ts`.
+
 | Página | Qué falta para activarla |
 |---|---|
 | Giving / Donations | Método de donación aprobado |

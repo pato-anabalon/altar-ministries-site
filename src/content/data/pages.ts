@@ -126,4 +126,31 @@ export const pages = {
       es: "Haz una consulta sobre tu visita, cómo sumarte a un equipo o el servicio a la comunidad.",
     },
   },
+  // Phase 2: pending until the client supplies each page's material (docs/PENDIENTES.md). Only
+  // titles here; the missing material is shown as placeholders, never written for them.
+  give: {
+    title: { en: "Give", es: "Donar" },
+    status: "pending",
+  },
+  opportunities: {
+    title: { en: "Opportunities", es: "Oportunidades" },
+    status: "pending",
+  },
+  bookshop: {
+    title: { en: "Bookshop", es: "Librería" },
+    status: "pending",
+  },
+  churches: {
+    title: { en: "Our churches", es: "Nuestras iglesias" },
+    // Client prototype (Global → Our Churches).
+    intro: {
+      en: "This directory will feature formally established churches as their details are approved.",
+      es: "Este directorio presentará las iglesias formalmente establecidas a medida que se aprueben sus datos.",
+    },
+    status: "pending",
+  },
+  supporters: {
+    title: { en: "Supporters", es: "Patrocinadores" },
+    status: "pending",
+  },
 };
